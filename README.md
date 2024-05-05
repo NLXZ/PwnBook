@@ -1,21 +1,6 @@
----
-description: >-
-  Welcome to H4Ts, a personal pentesting cheatsheet with tricks and scripts for
-  reconnaissance, enumeration, privesc, and more...
-layout:
-  title:
-    visible: true
-  description:
-    visible: true
-  tableOfContents:
-    visible: true
-  outline:
-    visible: true
-  pagination:
-    visible: false
----
-
 # >H4Ts\_
+
+Welcome to H4Ts, a personal pentesting cheatsheet with tricks and scripts for reconnaissance, enumeration, privesc, and more...
 
 ## Index
 
