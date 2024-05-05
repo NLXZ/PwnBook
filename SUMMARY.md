@@ -2,6 +2,8 @@
 
 * [>H4Ts\_](README.md)
 * [Reconnaissance](reconnaissance.md)
+* [Service Enumeration](service-enumeration.md)
+* [Exploitation](exploitation.md)
 * [Reverse Shells](reverse-shells.md)
 * [File Transfer](file-transfer.md)
 * [Linux](linux.md)
