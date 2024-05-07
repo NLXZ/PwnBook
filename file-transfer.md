@@ -1,6 +1,8 @@
 # File Transfer
 
-> You can always check the integrity of the files using `md5sum` to ensure they were transferred successfully.
+{% hint style="info" %}
+You can always check the integrity of the files using `md5sum` to ensure they were transferred successfully.
+{% endhint %}
 
 ## Sending
 
@@ -22,7 +24,7 @@ python -m SimpleHTTPServer <PORT>
 php -S 0.0.0.0:<PORT>
 ```
 
-### Smb
+### SMB
 
 ```bash
 smbserver.py <SHARE_NAME> $(pwd) -smb2support
@@ -66,7 +68,7 @@ wget <URL>
 curl -s <URL> -o <OUTPUT_FILE>
 ```
 
-### Smb
+### SMB
 
 Linux
 
@@ -86,7 +88,7 @@ copy \\<IP>\<SHARE_NAME>\<FILE> <OUTPUT_FILE>
 (New-Object Net.WebClient).DownloadString('<URL>') > <OUTPUT_FILE>
 ```
 
-### CMD
+### Batch
 
 ```batch
 certutil -urlcache -split -f <URL> <OUTPUT_FILE>

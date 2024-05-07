@@ -2,7 +2,9 @@
 
 ## Interactive TTYs
 
-> It's also possible to use `rlwrap` when starting your listening socket. (e.g. `rlwrap nc -nlvp 443`)
+{% hint style="info" %}
+It's also possible to use `rlwrap` when starting your listening socket. (e.g. `rlwrap nc -nlvp 443`)
+{% endhint %}
 
 ```bash
 script /dev/null -c bash

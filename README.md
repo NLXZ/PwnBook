@@ -4,11 +4,10 @@ Welcome to H4Ts, a personal pentesting cheatsheet with tricks and scripts for re
 
 ## Index
 
-* [Reconnaissance](reconnaissance.md)
-  * [Host Discovery](reconnaissance.md#host-discovery)
-  * [Port Scan](reconnaissance.md#port-scan)
-  * [Service Enumeration](reconnaissance.md#service-enumeration)
-  * [Fuzzing and Brute Force](reconnaissance.md#fuzzing-and-brute-force)
+* [Reconnaissance](network-services/reconnaissance.md)
+  * [Host Discovery](network-services/reconnaissance.md#host-discovery)
+  * [Port Scan](network-services/reconnaissance.md#port-scan)
+  * [Service Enumeration](network-services/reconnaissance.md#service-enumeration)
 * [Reverse Shell](reverse-shells.md)
   * [Interactive TTYs](reverse-shells.md#interactive-ttys)
   * [Reverse Shells](reverse-shells.md#reverse-shells)

