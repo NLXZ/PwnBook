@@ -18,12 +18,13 @@
   * [RDP](network-services/service-enumeration-and-exploitation/rdp.md)
   * [WinRM](network-services/service-enumeration-and-exploitation/winrm.md)
   * [MySQL](network-services/service-enumeration-and-exploitation/mysql.md)
+* [Web Application Exploitation](network-services/web-application-exploitation.md)
 
 ***
 
-* [Web Application Exploitation](web-application-exploitation.md)
 * [Reverse Shells](reverse-shells.md)
 * [File Transfer](file-transfer.md)
-* [Linux Privilege Escalation](linux.md)
-* [Windows Privilege Escalation](windows.md)
+* [Privilege Escalation](privilege-escalation/README.md)
+  * [Linux Privilege Escalation](privilege-escalation/linux.md)
+  * [Windows Privilege Escalation](privilege-escalation/windows.md)
 * [Tools](tools.md)
