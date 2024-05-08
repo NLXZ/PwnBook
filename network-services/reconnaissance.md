@@ -22,7 +22,7 @@ bash -c 'n=<network> ;for i in {1..254}; do \
 tr -d ":" &); done; wait'
 ```
 
-{% hint style="warning" %}
+{% hint style="info" %}
 Specify  the `<network>`without the last octet`(e.g. 192.168.1)`
 {% endhint %}
 
@@ -31,7 +31,7 @@ Specify  the `<network>`without the last octet`(e.g. 192.168.1)`
 ### Nmap TCP Port Scan
 
 ```bash
-nmap -p- --open -sS -n -v -Pn --min-rate 5000 -oG allPorts <target>
+nmap -p- --open -sS -n -v -Pn --min-rate 5000 -oN allPorts <target>
 ```
 
 ### Bash TCP Port Scan
@@ -46,7 +46,7 @@ then wait; fi; echo -ne "$port/65535\r"; done; wait'
 ### Nmap UDP Port Scan
 
 ```bash
-nmap -sU -F -oG udpPorts <target>
+nmap -sU -F -oN udpPorts <target>
 ```
 
 ### Service & Version Detection
