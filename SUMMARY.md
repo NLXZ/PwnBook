@@ -11,7 +11,19 @@
   * [HTTP/HTTPS](network-services/service-enumeration-and-exploitation/http-https.md)
   * [SMB](network-services/service-enumeration-and-exploitation/smb.md)
   * [RPC](network-services/service-enumeration-and-exploitation/rpc.md)
-* [Web Application Exploitation](network-services/web-application-exploitation.md)
+
+## Web Application Exploitation
+
+* [Command Injection](web-application-exploitation/command-injection.md)
+* [CSRF (Cross Site Request Forgery)](web-application-exploitation/csrf-cross-site-request-forgery.md)
+* [File Inclusion](web-application-exploitation/file-inclusion.md)
+* [File Upload](web-application-exploitation/file-upload.md)
+* [NoSQL Injection](web-application-exploitation/nosql-injection.md)
+* [Path Traversal](web-application-exploitation/path-traversal.md)
+* [SQL Injection](web-application-exploitation/sql-injection.md)
+* [SSRF (Server Side Request Forgery)](web-application-exploitation/ssrf-server-side-request-forgery.md)
+* [SSTI (Server Side Template Injection)](web-application-exploitation/ssti-server-side-template-injection.md)
+* [XSS (Cross Site Scripting)](web-application-exploitation/xss-cross-site-scripting.md)
 
 ## Post Exloitation
 
