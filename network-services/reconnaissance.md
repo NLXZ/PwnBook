@@ -1,6 +1,10 @@
 # Reconnaissance
 
+In the **reconnaissance** phase of penetration testing, the primary objective is to collect essential data on the target network's systems by constructing a detailed network map. This crucial step lays the groundwork for further analysis and potential exploitation.
+
 ## Host Discovery
+
+The initial step in network mapping involves pinpointing active hosts within the network. This can be accomplished by conducting ping sweeps and ARP scans to enumerate hosts.
 
 ### ARP Scan
 
@@ -27,6 +31,8 @@ Specify  the `<network>`without the last octet`(e.g. 192.168.1)`
 {% endhint %}
 
 ## Port Scan
+
+After completing network enumeration and identifying our targets, the next step involves scanning open ports on the hosts to uncover vulnerabilities and potential attack vectors.
 
 ### Nmap TCP Port Scan
 
