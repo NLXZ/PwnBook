@@ -24,6 +24,7 @@
 * [SSRF (Server Side Request Forgery)](web-application-exploitation/ssrf-server-side-request-forgery.md)
 * [SSTI (Server Side Template Injection)](web-application-exploitation/ssti-server-side-template-injection.md)
 * [XSS (Cross Site Scripting)](web-application-exploitation/xss-cross-site-scripting.md)
+* [XXE (XML External Entity)](web-application-exploitation/xxe-xml-external-entity.md)
 
 ## Post Exloitation
 
