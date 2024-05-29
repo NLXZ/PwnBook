@@ -2,29 +2,23 @@
 
 * [>H4Ts\_](README.md)
 
-## Network Services
+## ENUMERATION & EXPLOITATION
 
-* [Reconnaissance](network-services/reconnaissance.md)
-* [Service Enumeration & Exploitation](network-services/service-enumeration-and-exploitation/README.md)
-  * [FTP](network-services/service-enumeration-and-exploitation/ftp.md)
-  * [SSH](network-services/service-enumeration-and-exploitation/ssh.md)
-  * [HTTP/HTTPS](network-services/service-enumeration-and-exploitation/http-https.md)
-  * [SMB](network-services/service-enumeration-and-exploitation/smb.md)
-  * [RPC](network-services/service-enumeration-and-exploitation/rpc.md)
-
-## Web Application Exploitation
-
-* [Command Injection](web-application-exploitation/command-injection.md)
-* [CSRF (Cross Site Request Forgery)](web-application-exploitation/csrf-cross-site-request-forgery.md)
-* [File Inclusion](web-application-exploitation/file-inclusion.md)
-* [File Upload](web-application-exploitation/file-upload.md)
-* [NoSQL Injection](web-application-exploitation/nosql-injection.md)
-* [Path Traversal](web-application-exploitation/path-traversal.md)
-* [SQL Injection](web-application-exploitation/sql-injection.md)
-* [SSRF (Server Side Request Forgery)](web-application-exploitation/ssrf-server-side-request-forgery.md)
-* [SSTI (Server Side Template Injection)](web-application-exploitation/ssti-server-side-template-injection.md)
-* [XSS (Cross Site Scripting)](web-application-exploitation/xss-cross-site-scripting.md)
-* [XXE (XML External Entity)](web-application-exploitation/xxe-xml-external-entity.md)
+* [Reconnaissance](enumeration-and-exploitation/reconnaissance.md)
+* [Network Services](enumeration-and-exploitation/network-services.md)
+* [Web Vulnerabilities](enumeration-and-exploitation/web-vulnerabilities/README.md)
+  * [Command Injection](enumeration-and-exploitation/web-vulnerabilities/command-injection.md)
+  * [CSRF (Cross Site Request Forgery)](enumeration-and-exploitation/web-vulnerabilities/csrf-cross-site-request-forgery.md)
+  * [File Inclusion](enumeration-and-exploitation/web-vulnerabilities/file-inclusion.md)
+  * [File Upload](enumeration-and-exploitation/web-vulnerabilities/file-upload.md)
+  * [NoSQL Injection](enumeration-and-exploitation/web-vulnerabilities/nosql-injection.md)
+  * [Path Traversal](enumeration-and-exploitation/web-vulnerabilities/path-traversal.md)
+  * [SQL Injection](enumeration-and-exploitation/web-vulnerabilities/sql-injection.md)
+  * [SSRF (Server Side Request Forgery)](enumeration-and-exploitation/web-vulnerabilities/ssrf-server-side-request-forgery.md)
+  * [SSTI (Server Side Template Injection)](enumeration-and-exploitation/web-vulnerabilities/ssti-server-side-template-injection.md)
+  * [XSS (Cross Site Scripting)](enumeration-and-exploitation/web-vulnerabilities/xss-cross-site-scripting.md)
+  * [XXE (XML External Entity)](enumeration-and-exploitation/web-vulnerabilities/xxe-xml-external-entity.md)
+* [Active Directory](enumeration-and-exploitation/active-directory.md)
 
 ## Post Exloitation
 

@@ -1,7 +1,15 @@
 # File Transfer
 
 {% hint style="info" %}
-You can always check the integrity of the files using `md5sum` to ensure they were transferred successfully.
+You can always check the integrity of the files by computing the md5 hash of the file to ensure it was transferred successfully:
+
+```batch
+# Linux
+md5sum <file>
+
+# Windows
+certutil -hashfile <file> md5
+```
 {% endhint %}
 
 ## HTTP/PHP
