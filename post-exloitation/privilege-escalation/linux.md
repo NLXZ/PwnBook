@@ -153,6 +153,12 @@ grep -Ev "kworker|user,command"; old_ps=$new_ps; done
 find / -user <USER> -writable \( -name "*.sh" -o -name "*.py" \) -type f 2>/dev/null
 ```
 
+## Passwords
+
+```bash
+grep -Eriao --color=always '(password|passwd|pass|pwd|key|secret|token)[[:space:]]*[:=][[:space:]]*[^[:space:]]{6,}' . | awk '{ line = $0; sub(/^[^:]*:[^:]*:/, "", line); if (!seen[line]++) print $0; }'
+```
+
 ## Exploits
 
 ### Polkit - (CVE-2021-4034)
