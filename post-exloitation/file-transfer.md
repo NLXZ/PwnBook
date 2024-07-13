@@ -76,7 +76,10 @@ smbclient //<ip>/<share> -c "get <file> <output>"
 
 #### Windows
 
-```batch
+```powershell
+# mount smb Share to drive
+net use z: \\<ip>\share /user:<user> <pass>
+# copy from share
 copy \\<ip>\<share>\<file> <output>
 ```
 

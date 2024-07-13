@@ -24,6 +24,12 @@ If you dont know the full path of the file or even the extension, you can use: `
 cmd /s <FILE>
 ```
 
+### List Recursive Directories (PowerShell)
+
+```powershell
+ls . -Recurse -Force -Name -Filter "<filter>" | foreach { ls -for $_ }
+```
+
 ### [WinPEAS](https://github.com/peass-ng/PEASS-ng)
 
 ```powershell
