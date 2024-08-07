@@ -30,6 +30,12 @@ cmd /s <FILE>
 ls . -Recurse -Force -Name -Filter "<filter>" | foreach { ls -for $_ }
 ```
 
+### Add SMB share to network drives
+
+```batch
+net use z: \\<ip>\<share> /user:<user> <pass>
+```
+
 ### [WinPEAS](https://github.com/peass-ng/PEASS-ng)
 
 ```powershell

