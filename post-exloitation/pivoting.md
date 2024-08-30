@@ -17,9 +17,11 @@ nmap -sn 10.10.10.0/24
 
 ## Bash
 
+{% code overflow="wrap" %}
 ```bash
 bash -c 'n=<network> ;for i in {1..254}; do (timeout 2 ping -c 1 $n.$i | grep -E -o "([0-9]{1,3}\.){3}[0-9]{1,3}:" | tr -d ":" &); done; wait'
 ```
+{% endcode %}
 
 {% hint style="info" %}
 Specify  the  `<network>` without the last octet `(e.g. 192.168.1)`
