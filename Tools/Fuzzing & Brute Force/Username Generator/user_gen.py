@@ -252,7 +252,7 @@ if __name__ == "__main__":
                 for name in names:
                     usernames = generate_usernames(name)
                     for username in usernames:
-                        if args.output is none:
+                        if args.output is None:
                             print(username)
                         else:
                             with open(args.output, 'a') as output_file:
@@ -268,7 +268,7 @@ if __name__ == "__main__":
                     for name in names:
                         usernames = generate_usernames(name)
                         for username in usernames:
-                            if args.output is none:
+                            if args.output is None:
                                 print(username)
                             else:
                                 with open(args.output, 'a') as output_file:
@@ -279,7 +279,7 @@ if __name__ == "__main__":
             else:
                 print(colored(f"\n[+] finished!", "green"))
             
-        except filenotfounderror:
+        except FileNotFoundError:
             print(colored(f"\n[!] file not found: {args.file}", "red"))
         
     else:
