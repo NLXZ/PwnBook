@@ -1,6 +1,6 @@
 # Table of contents
 
-* [PwnBook](README.md)
+* [Welcome](README.md)
 
 ## ENUMERATION & EXPLOITATION
 
