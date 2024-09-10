@@ -1,112 +1,152 @@
 # File Transfer
 
-{% hint style="info" %}
-You can always check the integrity of the files by computing the md5 hash of the file to ensure it was transferred successfully:
+## Integrity check
 
+{% tabs %}
+{% tab title="Linux" %}
+{% code overflow="wrap" %}
 ```batch
-# Linux
 md5sum <file>
+```
+{% endcode %}
+{% endtab %}
 
-# Windows
+{% tab title="Windows" %}
+{% code overflow="wrap" %}
+```batch
 certutil -hashfile <file> md5
 ```
-{% endhint %}
+{% endcode %}
+{% endtab %}
+{% endtabs %}
 
 ## HTTP/PHP
 
-### Python3
+### HTTP Server
 
-```bash
+{% tabs %}
+{% tab title="Python3" %}
+```
 python3 -m http.server <port>
 ```
+{% endtab %}
 
-### Python2
-
-```bash
+{% tab title="Python2" %}
+```
 python2 -m SimpleHTTPServer <port>
 ```
+{% endtab %}
 
-### PHP
-
-```bash
-php -S 0.0.0.0:<port>
+{% tab title="PHP" %}
 ```
+php -S 0:<port>
+```
+{% endtab %}
+{% endtabs %}
 
 ### Download
 
-#### Wget
-
+{% tabs %}
+{% tab title="Wget" %}
+{% code overflow="wrap" %}
 ```bash
 wget <url>
 ```
+{% endcode %}
+{% endtab %}
 
-#### Curl
-
+{% tab title="Curl" %}
+{% code overflow="wrap" %}
 ```bash
 curl -s <url> -o <output>
 ```
+{% endcode %}
+{% endtab %}
 
-#### PowerShell
-
+{% tab title="PowerShell" %}
+{% code overflow="wrap" %}
 ```powershell
 (New-Object Net.WebClient).DownloadString('<url>') > <output>
 ```
+{% endcode %}
+{% endtab %}
 
-#### Batch
-
+{% tab title="CMD" %}
+{% code overflow="wrap" %}
 ```batch
 certutil -urlcache -split -f <url> <output>
 ```
+{% endcode %}
+{% endtab %}
+{% endtabs %}
 
 ## SMB
 
 ### SMB Server
 
 ```bash
-smbserver.py <share> $(pwd) -smb2support
+smbserver.py <share> $(pwd) -smb2support [-username user -password pass]
 ```
 
 ### Download
 
-#### Linux
-
+{% tabs %}
+{% tab title="Linux" %}
+{% code overflow="wrap" %}
 ```bash
-smbclient //<ip>/<share> -c "get <file> <output>"
+smbclient -U 'user[%pass]' //<ip>/<share> -c "get <file> <output>"
 ```
+{% endcode %}
+{% endtab %}
 
-#### Windows
-
+{% tab title="Windows" %}
+{% code overflow="wrap" %}
 ```powershell
 # mount smb Share to drive
-net use z: \\<ip>\<share> /user:<user> <pass>
+net use z: \\<ip>\<share> [/user:user pass]
 # copy from share
 copy \\<ip>\<share>\<file> <output>
 ```
+{% endcode %}
+{% endtab %}
+{% endtabs %}
 
-## Ncat
+## Netcat
 
-### Send
-
+{% tabs %}
+{% tab title="Send" %}
+{% code overflow="wrap" %}
 ```bash
 nc -nlvp <port> < <file>
 ```
+{% endcode %}
+{% endtab %}
 
-### Recieve
-
+{% tab title="Recieve" %}
+{% code overflow="wrap" %}
 ```bash
 nc -nlvp <port> > <output>
 ```
+{% endcode %}
+{% endtab %}
+{% endtabs %}
 
 ## Bash
 
-### Send
-
+{% tabs %}
+{% tab title="Send" %}
+{% code overflow="wrap" %}
 ```bash
 cat <file> > /dev/tcp/<ip>/<port>
 ```
+{% endcode %}
+{% endtab %}
 
-### Recieve
-
+{% tab title="Recieve" %}
+{% code overflow="wrap" %}
 ```bash
 cat < /dev/tcp/<target>/<port> > <output>
 ```
+{% endcode %}
+{% endtab %}
+{% endtabs %}

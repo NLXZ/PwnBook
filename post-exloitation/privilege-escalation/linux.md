@@ -5,25 +5,26 @@
 #### [LinPEAS](https://github.com/peass-ng/PEASS-ng)
 
 ```bash
-curl -sL https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh
+wget https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh
 ```
 
 #### [LSE](https://github.com/diego-treitos/linux-smart-enumeration)
 
 ```bash
-curl -sL https://github.com/diego-treitos/linux-smart-enumeration/releases/latest/download/lse.sh | bash
+wget https://github.com/diego-treitos/linux-smart-enumeration/releases/latest/download/lse.sh
 ```
 
 #### [LinEnum](https://github.com/rebootuser/LinEnum)
 
 ```bash
-curl -sL https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh | bash
+wget https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh
 ```
 
 ## System Info
 
 Obtain information about the system **architecture, distribution, and kernel version**.
 
+{% code overflow="wrap" %}
 ```bash
 uname -a  # System information
 lsb_release -a  # Distribution information
@@ -31,18 +32,21 @@ getconf LONG_BIT  # System architecture
 cat /proc/version  # Kernel version
 cat /etc/os-release  # OS details
 ```
+{% endcode %}
 
 ## Path
 
 Check if you have **write permissions** for any directory in the PATH.
 
+{% code overflow="wrap" %}
 ```bash
 echo $PATH | tr ':' '\n' | sort -u | xargs -I{} bash -c 'if [ -w "{}" ]; then echo "[+] {}"; fi'
 ```
+{% endcode %}
 
-## Enviroment Variables
+## Environment Variables
 
-Sometimes we can find password or sensitive information in enviroment variables.
+Sometimes we can find password or sensitive information in environment variables.
 
 ```bash
 env  # Environment variables
