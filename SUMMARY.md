@@ -1,6 +1,6 @@
 # Table of contents
 
-* [>H4Ts\_](README.md)
+* [PwnBook](README.md)
 
 ## ENUMERATION & EXPLOITATION
 
