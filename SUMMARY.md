@@ -28,7 +28,3 @@
   * [Linux Privilege Escalation](post-exloitation/privilege-escalation/linux.md)
   * [Windows Privilege Escalation](post-exloitation/privilege-escalation/windows.md)
 * [Pivoting](post-exloitation/pivoting.md)
-
-## Tools
-
-* [Tools](tools/tools.md)
