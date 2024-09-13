@@ -13,7 +13,7 @@ You can download some useful binaries such as chisel, socat, nmap, etc:\
 {% tab title="Bash" %}
 {% code overflow="wrap" %}
 ```bash
-bash -c 'n=10.10.10 ;for i in {1..254}; do (timeout 2 ping -c 1 $n.$i | grep -E -o "([0-9]{1,3}\.){3}[0-9]{1,3}:" | tr -d ":" &); done; wait'
+bash -c 'n=10.10.10 ;for i in $(seq 1 254); do (timeout 2 ping -c 1 $n.$i | grep -E -o "([0-9]{1,3}\.){3}[0-9]{1,3}:" | tr -d ":" &); done; wait'
 ```
 {% endcode %}
 {% endtab %}
