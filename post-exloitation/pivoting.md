@@ -40,7 +40,7 @@ arp -a
 {% tab title="Bash" %}
 {% code overflow="wrap" %}
 ```bash
-bash -c 'ip=10.10.10.10; for port in $(seq 1 65535); do bash -c "echo > /dev/tcp/$ip/$port" > /dev/null 2>&1 && echo -e "$port\033[K" & if [ $((port % 200)) -eq 0 ]; then wait; fi; echo -ne "$port/65535\r"; done; wait'
+bash -c 'ip=<target>; for port in $(seq 1 65535); do bash -c "echo > /dev/tcp/$ip/$port" > /dev/null 2>&1 && echo -e "$port\033[K" & if [ $((port % 500)) -eq 0 ]; then wait; fi; echo -ne "$port/65535\r"; done; wait'
 ```
 {% endcode %}
 {% endtab %}
@@ -48,7 +48,7 @@ bash -c 'ip=10.10.10.10; for port in $(seq 1 65535); do bash -c "echo > /dev/tcp
 {% tab title="Nmap" %}
 {% code overflow="wrap" %}
 ```bash
-.\nmap -p- -sT -n -Pn -v --min-rate 5000 10.10.10.10
+.\nmap -p- -sT -n -Pn -v --min-rate 10000 <target>
 ```
 {% endcode %}
 {% endtab %}
@@ -58,7 +58,7 @@ bash -c 'ip=10.10.10.10; for port in $(seq 1 65535); do bash -c "echo > /dev/tcp
 
 {% code overflow="wrap" %}
 ```bash
-seq 1 65535 | xargs -P 500 -I {} proxychains -q nmap -sT -Pn -p{} -open --min-rate 5000 -n -vvv 10.10.10.10 2>&1 | grep -Po '\d+(?=/tcp open)'
+seq 1 65535 | xargs -P 500 -I {} proxychains -q nmap -sT -Pn -p{} -open --min-rate 5000 -n -vvv <target> 2>&1 | grep -Po '\d+(?=/tcp open)'
 ```
 {% endcode %}
 
@@ -66,7 +66,7 @@ seq 1 65535 | xargs -P 500 -I {} proxychains -q nmap -sT -Pn -p{} -open --min-ra
 
 {% code overflow="wrap" %}
 ```bash
-bash -c 'ip=10.10.10.10; for port in $(seq 1 65535); do proxychains -q bash -c "echo > /dev/tcp/$ip/$port" > /dev/null 2>&1 && echo -e "$port\033[K" & if [ $((port % 200)) -eq 0 ]; then wait; fi; echo -ne "$port/65535\r"; done; wait'
+bash -c 'ip=<target>; for port in $(seq 1 65535); do proxychains -q bash -c "echo > /dev/tcp/$ip/$port" > /dev/null 2>&1 && echo -e "$port\033[K" & if [ $((port % 200)) -eq 0 ]; then wait; fi; echo -ne "$port/65535\r"; done; wait'
 ```
 {% endcode %}
 {% endtab %}

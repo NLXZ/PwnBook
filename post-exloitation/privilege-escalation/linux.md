@@ -4,24 +4,10 @@ icon: linux
 
 # Linux Privilege Escalation
 
-## Tools
-
-#### [LinPEAS](https://github.com/peass-ng/PEASS-ng)
+## LinPEAS
 
 ```bash
 wget https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh
-```
-
-#### [LSE](https://github.com/diego-treitos/linux-smart-enumeration)
-
-```bash
-wget https://github.com/diego-treitos/linux-smart-enumeration/releases/latest/download/lse.sh
-```
-
-#### [LinEnum](https://github.com/rebootuser/LinEnum)
-
-```bash
-wget https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh
 ```
 
 ## System Info
