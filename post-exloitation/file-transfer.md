@@ -1,3 +1,7 @@
+---
+icon: arrow-right-arrow-left
+---
+
 # File Transfer
 
 ## Integrity check

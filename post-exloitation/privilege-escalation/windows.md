@@ -1,3 +1,7 @@
+---
+icon: windows
+---
+
 # Windows Privilege Escalation
 
 ## System Enumeration

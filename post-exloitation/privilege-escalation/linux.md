@@ -1,3 +1,7 @@
+---
+icon: linux
+---
+
 # Linux Privilege Escalation
 
 ## Tools

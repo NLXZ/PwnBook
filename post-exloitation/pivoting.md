@@ -1,3 +1,7 @@
+---
+icon: diagram-project
+---
+
 # Pivoting
 
 ## Binaries
@@ -109,6 +113,13 @@ ssh user@10.10.10.10 -L 8080:127.0.0.1:80
 ssh user@10.10.10.10 -D 1080
 ```
 {% endcode %}
+
+
 {% endtab %}
 {% endtabs %}
 
+## Subnets
+
+```sh
+sshuttle -r '<user>:<password>@<target>' <subnet>/<cidr>
+```

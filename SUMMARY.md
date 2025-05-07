@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Welcome](README.md)
+* [👾 Welcome](README.md)
 
 ## ENUMERATION & EXPLOITATION
 
@@ -18,7 +18,8 @@
   * [SSTI (Server Side Template Injection)](enumeration-and-exploitation/web-vulnerabilities/ssti-server-side-template-injection.md)
   * [XSS (Cross Site Scripting)](enumeration-and-exploitation/web-vulnerabilities/xss-cross-site-scripting.md)
   * [XXE (XML External Entity)](enumeration-and-exploitation/web-vulnerabilities/xxe-xml-external-entity.md)
-* [Active Directory](enumeration-and-exploitation/active-directory.md)
+* [Active Directory](enumeration-and-exploitation/active-directory/README.md)
+  * [Capturing NTLM hashes](enumeration-and-exploitation/active-directory/capturing-ntlm-hashes.md)
 
 ## Post Exloitation
 
