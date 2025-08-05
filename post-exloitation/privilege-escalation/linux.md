@@ -133,26 +133,28 @@ ls -l /var/log/cron
 ## Process Monitor
 
 {% hint style="info" %}
-You can add words to the blacklist on the `grep -Ev` section.
+You can blacklist words on the `grep -Ev` section.
+
+For example, to filter the actual user processes: `grep -Ev "kworker|$USER"`
 {% endhint %}
 
 {% code overflow="wrap" %}
 ```bash
-old_ps=$(ps -eo user,command); while true; do new_ps=$(ps -eo user,command); diff <(echo "$old_ps") <(echo "$new_ps") | grep "[\>\<]" | grep -Ev "kworker|user,command"; old_ps=$new_ps; done
+while true; do new=$(ps -eo user,cmd); diff <(echo "$old") <(echo "$new") | grep -E "<|>" | grep -Ev "kworker"; old=$new; done
 ```
 {% endcode %}
 
 ## User Files
 
 ```bash
-find / -user <user> -xdev 2>/dev/null
+find / -xdev -user <user> 2>/dev/null
 ```
 
 ## Passwords
 
 {% code overflow="wrap" %}
 ```bash
-grep -air -oP --exclude="*."{js,css,html} '(?i)[[:space:][:punct:]]?(password|pass|passwd|pwd|credentials|creds|secret|token|key)[[:space:][:punct:]]*[:=][[:space:]]*[^[:space:]]{4,}' . | sort -u | awk -F':' '{ match_str = substr($0, index($0,$2)); gsub(/^[[:space:]]+/, "", match_str); if (length(match_str) > 50) { match_str = substr(match_str, 1, 50) "..."; } blue = "\033[34m"; red = "\033[31m"; reset = "\033[0m"; print "\nFile:  " blue $1 reset "\nMatch: " red match_str reset;}'
+grep -P -a -i -R --exclude="*."{js,css,html} "(\b\w*(pass|pwd|auth|secret)\w*\b\s*[:=]\s*\S+)|['\"]\s*\w*(pass|pwd|auth|secret)\w*\s*['\"]\s*:\s*['\"]\S+['\"]|\(\s*['\"]\w*(pass|pwd|auth|secret)\w*['\"]\s*,\s*['\"]\S+['\"]\s*\)|(\w+://\S+:\S+@)|(\\$\w{1,4}[\\$./A-Za-z0-9]{8,50})"
 ```
 {% endcode %}
 

@@ -4,7 +4,7 @@ icon: arrow-right-arrow-left
 
 # File Transfer
 
-## Integrity check
+## Integrity verification
 
 {% tabs %}
 {% tab title="Linux" %}
