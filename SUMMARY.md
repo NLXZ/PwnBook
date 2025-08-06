@@ -19,7 +19,7 @@
   * [Cross Site Scripting (XSS)](enumeration-and-exploitation/web-vulnerabilities/xss-cross-site-scripting.md)
   * [XML External Entity (XXE)](enumeration-and-exploitation/web-vulnerabilities/xxe-xml-external-entity.md)
 * [Active Directory](enumeration-and-exploitation/active-directory/README.md)
-  * [Capturing NTLM hashes](enumeration-and-exploitation/active-directory/capturing-ntlm-hashes.md)
+  * [Stealing NTLM hashes](enumeration-and-exploitation/active-directory/stealing-ntlm-hashes.md)
 
 ## Post Exloitation
 
