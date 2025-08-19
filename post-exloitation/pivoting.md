@@ -17,7 +17,15 @@ You can download some useful binaries such as chisel, socat, nmap, etc:\
 {% tab title="Bash" %}
 {% code overflow="wrap" %}
 ```bash
-bash -c 'n=10.10.10 ;for i in $(seq 1 254); do (timeout 2 ping -c 1 $n.$i | grep -E -o "([0-9]{1,3}\.){3}[0-9]{1,3}:" | tr -d ":" &); done; wait'
+for ip in 10.10.10.{1..254}; do ((ping -c1 -W1 $ip &>/dev/null && echo $ip)&) done; wait
+```
+{% endcode %}
+{% endtab %}
+
+{% tab title="PowerShell" %}
+{% code overflow="wrap" %}
+```powershell
+$t = 1..254 | % { [Net.NetworkInformation.Ping]::new().SendPingAsync("10.10.10.$_", 100) }; [Threading.Tasks.Task]::WaitAll($t); $t.Result.Where{$_.Status -eq "Success"}.Address.IPAddressToString
 ```
 {% endcode %}
 {% endtab %}
@@ -34,13 +42,21 @@ arp -a
 {% endtab %}
 {% endtabs %}
 
-## Port scan
+## Port discovery
 
 {% tabs %}
 {% tab title="Bash" %}
 {% code overflow="wrap" %}
 ```bash
-bash -c 'ip=<target>; for port in $(seq 1 65535); do bash -c "echo > /dev/tcp/$ip/$port" > /dev/null 2>&1 && echo -e "$port\033[K" & if [ $((port % 500)) -eq 0 ]; then wait; fi; echo -ne "$port/65535\r"; done; wait'
+for port in {1..65535}; do ((timeout 0.01 bash -c "echo > /dev/tcp/10.10.10.10/$port" 2>/dev/null && echo -e "$port\033[K")&); (( port % 500 == 0 )) && wait && echo -ne "$port/65535\r"; done; wait
+```
+{% endcode %}
+{% endtab %}
+
+{% tab title="PowerShell" %}
+{% code overflow="wrap" %}
+```powershell
+$t = 1..10000 | % { $c = [System.Net.Sockets.TcpClient]::new(); [PSCustomObject]@{Port=$_; Task=$c.ConnectAsync($ip, $_); Client=$c }}; $null = [Threading.Tasks.Task]::WaitAll($t.Task, 100); $t | ? {$_.Task.IsCompleted -and $_.Client.Connected} | % {$_.Port; $_.Client.Dispose()}
 ```
 {% endcode %}
 {% endtab %}
@@ -82,11 +98,10 @@ First, run the chisel server in reverse mode on your host:
 chisel server -p 8081 --reverse
 ```
 
-Then, connect the client to the server:
+Then, connect to the server:
 
 ```bash
-# Connect to chisel server on 10.10.10.10:8081
-# Forward your 127.0.0.1:8080 to 10.10.10.20:80
+# Forward 127.0.0.1:8080 to 10.10.10.20:80
 chisel client 10.10.10.10:8081 R:8080:10.10.10.20:80
 
 # Create proxy SOCKS5 on 127.0.0.1:1080
@@ -118,7 +133,7 @@ ssh user@10.10.10.10 -D 1080
 {% endtab %}
 {% endtabs %}
 
-## Subnets
+## Subnet forwarding
 
 ```sh
 sshuttle -r '<user>:<password>@<target>' <subnet>/<cidr>

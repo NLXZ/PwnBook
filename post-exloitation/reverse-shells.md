@@ -107,7 +107,7 @@ stty rows <rows> columns <cols>  # Check size in another window -> stty size
 
 #### Automatic Shell Stabilization
 
-I created this script which sets up a handler and automatically stabilizes Linux reverse shells. And for Windows machines uses `rlwrap` to allow command history, CTRL + L to clear the screen and other functions, also preventing CTRL + C from killing the session
+This script sets up a handler and automatically stabilizes Linux reverse shells. And for Windows machines uses `rlwrap` to allow command history, CTRL + L to clear the screen and other functions, also preventing CTRL + C from killing the session
 
 {% embed url="https://github.com/NLXZ/pwnc/" %}
 

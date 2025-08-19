@@ -24,7 +24,7 @@ certutil -hashfile <file> md5
 {% endtab %}
 {% endtabs %}
 
-## HTTP/PHP
+## HTTP
 
 ### HTTP Server
 
@@ -71,6 +71,12 @@ curl -s <url> -o <output>
 {% code overflow="wrap" %}
 ```powershell
 (New-Object Net.WebClient).DownloadString('<url>') > <output>
+```
+{% endcode %}
+
+{% code overflow="wrap" %}
+```powershell
+Invoke-WebRequest <url> -o <output>
 ```
 {% endcode %}
 {% endtab %}
