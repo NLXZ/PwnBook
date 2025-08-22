@@ -1,6 +1,0 @@
----
-icon: hashtag
----
-
-# Privilege Escalation
-

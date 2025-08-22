@@ -1,5 +1,19 @@
 ---
 icon: book-skull
+layout:
+  width: default
+  title:
+    visible: true
+  description:
+    visible: false
+  tableOfContents:
+    visible: true
+  outline:
+    visible: false
+  pagination:
+    visible: false
+  metadata:
+    visible: false
 ---
 
 # Reverse Shells
@@ -9,8 +23,6 @@ icon: book-skull
 ### Online Reverse Shell Generator
 
 {% embed url="https://www.revshells.com/" %}
-[https://www.revshells.com](https://www.revshells.com/)/
-{% endembed %}
 
 ### Bash
 

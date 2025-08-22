@@ -1,5 +1,19 @@
 ---
 icon: radar
+layout:
+  width: default
+  title:
+    visible: true
+  description:
+    visible: false
+  tableOfContents:
+    visible: true
+  outline:
+    visible: false
+  pagination:
+    visible: false
+  metadata:
+    visible: false
 ---
 
 # Reconnaissance
@@ -24,7 +38,7 @@ arp-scan -I <interface> --localnet --ignoredups
 {% endtab %}
 {% endtabs %}
 
-## Port scan
+## Port scanning
 
 {% tabs %}
 {% tab title="TCP SYN" %}
