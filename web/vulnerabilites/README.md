@@ -1,13 +1,13 @@
 ---
-icon: globe
+icon: bug
 layout:
   width: default
   title:
-    visible: false
+    visible: true
   description:
     visible: false
   tableOfContents:
-    visible: false
+    visible: true
   outline:
     visible: false
   pagination:
@@ -16,5 +16,5 @@ layout:
     visible: false
 ---
 
-# Web Application Testing
+# Web Application Vulnerabilities
 

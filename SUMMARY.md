@@ -2,30 +2,30 @@
 
 * [👾 Welcome](README.md)
 
-## INFORMATION GATHERING
+## NETWORK ENUMERATION <a href="#enum" id="enum"></a>
 
-* [Reconnaissance](information-gathering/recon.md)
+* [Reconnaissance](enum/recon.md)
+* [Network Services](enum/services.md)
 
 ## ACTIVE DIRECTORY <a href="#ad" id="ad"></a>
 
 * [Active Directory Methodology](ad/methodology.md)
 * [Capturing NTLM](ad/ntlm.md)
 
-## Exploitation
+## WEB APPLICATION TESTING <a href="#web" id="web"></a>
 
-* [Network Services](exploitation/services.md)
-* [Web Application Testing](exploitation/web/README.md)
-  * [Command Injection](exploitation/web/command-injection.md)
-  * [Cross Site Request Forgery (CSRF)](exploitation/web/csrf-cross-site-request-forgery.md)
-  * [File Inclusion](exploitation/web/file-inclusion.md)
-  * [File Upload](exploitation/web/file-upload.md)
-  * [NoSQL Injection](exploitation/web/nosql-injection.md)
-  * [Path Traversal](exploitation/web/path-traversal.md)
-  * [SQL Injection](exploitation/web/sql-injection.md)
-  * [Server Side Request Forgery (SSRF)](exploitation/web/ssrf-server-side-request-forgery.md)
-  * [Server Side Template Injection (SSTI)](exploitation/web/ssti-server-side-template-injection.md)
-  * [Cross Site Scripting (XSS)](exploitation/web/xss-cross-site-scripting.md)
-  * [XML External Entity (XXE)](exploitation/web/xxe-xml-external-entity.md)
+* [Web Application Vulnerabilities](web/vulnerabilites/README.md)
+  * [Command Injection](web/vulnerabilites/command-injection.md)
+  * [Cross Site Request Forgery (CSRF)](web/vulnerabilites/csrf-cross-site-request-forgery.md)
+  * [Cross Site Scripting (XSS)](web/vulnerabilites/xss-cross-site-scripting.md)
+  * [File Inclusion](web/vulnerabilites/file-inclusion.md)
+  * [File Upload](web/vulnerabilites/file-upload.md)
+  * [NoSQL Injection](web/vulnerabilites/nosql-injection.md)
+  * [Path Traversal](web/vulnerabilites/path-traversal.md)
+  * [Server Side Request Forgery (SSRF)](web/vulnerabilites/ssrf-server-side-request-forgery.md)
+  * [Server Side Template Injection (SSTI)](web/vulnerabilites/ssti-server-side-template-injection.md)
+  * [SQL Injection](web/vulnerabilites/sql-injection.md)
+  * [XML External Entity (XXE)](web/vulnerabilites/xxe-xml-external-entity.md)
 
 ## Post Exloitation
 

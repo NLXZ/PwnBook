@@ -147,8 +147,8 @@ wfuzz -H 'Host: FUZZ.<target>' -w wordlist.txt http://<target>/
 
 #### User input
 
-{% content-ref url="web/" %}
-[web](web/)
+{% content-ref url="../web/vulnerabilites/" %}
+[vulnerabilites](../web/vulnerabilites/)
 {% endcontent-ref %}
 
 ## SMB
