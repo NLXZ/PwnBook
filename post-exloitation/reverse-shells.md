@@ -6,9 +6,11 @@ icon: book-skull
 
 ## Reverse Shells
 
-### Reverse Shell Generator
+### Online Reverse Shell Generator
 
-[https://www.revshells.com/](https://www.revshells.com/)
+{% embed url="https://www.revshells.com/" %}
+[https://www.revshells.com](https://www.revshells.com/)/
+{% endembed %}
 
 ### Bash
 

@@ -16,7 +16,7 @@ You can download some useful binaries such as chisel, socat, nmap, etc:\
 {% tabs %}
 {% tab title="Bash" %}
 {% code overflow="wrap" %}
-```bash
+```sh
 for ip in 10.10.10.{1..254}; do ((ping -c1 -W1 $ip &>/dev/null && echo $ip)&) done; wait
 ```
 {% endcode %}
@@ -31,12 +31,12 @@ $t = 1..254 | % { [Net.NetworkInformation.Ping]::new().SendPingAsync("10.10.10.$
 {% endtab %}
 
 {% tab title="Nmap" %}
-<pre class="language-bash" data-overflow="wrap"><code class="lang-bash"><strong>./nmap -sn 10.10.10.0/24
+<pre class="language-sh" data-overflow="wrap"><code class="lang-sh"><strong>./nmap -sn 10.10.10.0/24
 </strong></code></pre>
 {% endtab %}
 
 {% tab title="ARP" %}
-```bash
+```sh
 arp -a
 ```
 {% endtab %}
@@ -47,7 +47,7 @@ arp -a
 {% tabs %}
 {% tab title="Bash" %}
 {% code overflow="wrap" %}
-```bash
+```sh
 for port in {1..65535}; do ((timeout 0.01 bash -c "echo > /dev/tcp/10.10.10.10/$port" 2>/dev/null && echo -e "$port\033[K")&); (( port % 500 == 0 )) && wait && echo -ne "$port/65535\r"; done; wait
 ```
 {% endcode %}
@@ -63,7 +63,7 @@ $t = 1..10000 | % { $c = [System.Net.Sockets.TcpClient]::new(); [PSCustomObject]
 
 {% tab title="Nmap" %}
 {% code overflow="wrap" %}
-```bash
+```sh
 .\nmap -p- -sT -n -Pn -v --min-rate 10000 <target>
 ```
 {% endcode %}
@@ -73,7 +73,7 @@ $t = 1..10000 | % { $c = [System.Net.Sockets.TcpClient]::new(); [PSCustomObject]
 ### Proxychains -> Nmap
 
 {% code overflow="wrap" %}
-```bash
+```sh
 seq 1 65535 | xargs -P 500 -I {} proxychains -q nmap -sT -Pn -p{} -open --min-rate 5000 -n -vvv <target> 2>&1 | grep -Po '\d+(?=/tcp open)'
 ```
 {% endcode %}
@@ -81,7 +81,7 @@ seq 1 65535 | xargs -P 500 -I {} proxychains -q nmap -sT -Pn -p{} -open --min-ra
 ### Proxychains -> Bash
 
 {% code overflow="wrap" %}
-```bash
+```sh
 bash -c 'ip=<target>; for port in $(seq 1 65535); do proxychains -q bash -c "echo > /dev/tcp/$ip/$port" > /dev/null 2>&1 && echo -e "$port\033[K" & if [ $((port % 200)) -eq 0 ]; then wait; fi; echo -ne "$port/65535\r"; done; wait'
 ```
 {% endcode %}
@@ -94,15 +94,15 @@ bash -c 'ip=<target>; for port in $(seq 1 65535); do proxychains -q bash -c "ech
 {% tab title="Chisel" %}
 First, run the chisel server in reverse mode on your host:
 
-```bash
+```sh
 chisel server -p 8081 --reverse
 ```
 
 Then, connect to the server:
 
-```bash
-# Forward 127.0.0.1:8080 to 10.10.10.20:80
-chisel client 10.10.10.10:8081 R:8080:10.10.10.20:80
+```sh
+# Forward port 8080 to 10.10.10.20:80
+chisel client 10.10.10.10:8081 R:3306:127.0.0.1:3306
 
 # Create proxy SOCKS5 on 127.0.0.1:1080
 chisel client 10.10.10.10:8081 R:socks
@@ -111,7 +111,7 @@ chisel client 10.10.10.10:8081 R:socks
 
 {% tab title="Socat" %}
 {% code overflow="wrap" %}
-```bash
+```sh
 # Forward port 8080 to 10.10.10.20:80
 socat tcp-l:8080,fork,reuseaddr tcp:10.10.10.20:80
 ```
@@ -120,16 +120,14 @@ socat tcp-l:8080,fork,reuseaddr tcp:10.10.10.20:80
 
 {% tab title="SSH" %}
 {% code overflow="wrap" %}
-```bash
-# Forward your 127.0.0.1:8080 to 10.10.10.20:80
+```sh
+# Forward port 8080 to 127.0.0.1:80
 ssh user@10.10.10.10 -L 8080:127.0.0.1:80
 
 # Create proxy SOCKS5 on 127.0.0.1:1080
 ssh user@10.10.10.10 -D 1080
 ```
 {% endcode %}
-
-
 {% endtab %}
 {% endtabs %}
 

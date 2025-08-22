@@ -9,7 +9,7 @@ icon: arrow-right-arrow-left
 {% tabs %}
 {% tab title="Linux" %}
 {% code overflow="wrap" %}
-```batch
+```sh
 md5sum <file>
 ```
 {% endcode %}
@@ -17,7 +17,7 @@ md5sum <file>
 
 {% tab title="Windows" %}
 {% code overflow="wrap" %}
-```batch
+```sh
 certutil -hashfile <file> md5
 ```
 {% endcode %}
@@ -30,19 +30,19 @@ certutil -hashfile <file> md5
 
 {% tabs %}
 {% tab title="Python3" %}
-```
+```sh
 python3 -m http.server <port>
 ```
 {% endtab %}
 
 {% tab title="Python2" %}
-```
+```sh
 python2 -m SimpleHTTPServer <port>
 ```
 {% endtab %}
 
 {% tab title="PHP" %}
-```
+```sh
 php -S 0:<port>
 ```
 {% endtab %}
@@ -83,7 +83,7 @@ Invoke-WebRequest <url> -o <output>
 
 {% tab title="CMD" %}
 {% code overflow="wrap" %}
-```batch
+```sh
 certutil -urlcache -split -f <url> <output>
 ```
 {% endcode %}
@@ -94,7 +94,7 @@ certutil -urlcache -split -f <url> <output>
 
 ### SMB Server
 
-```bash
+```sh
 smbserver.py <share> $(pwd) -smb2support [-username user -password pass]
 ```
 
@@ -103,7 +103,7 @@ smbserver.py <share> $(pwd) -smb2support [-username user -password pass]
 {% tabs %}
 {% tab title="Linux" %}
 {% code overflow="wrap" %}
-```bash
+```sh
 smbclient -U 'user[%pass]' //<ip>/<share> -c "get <file> <output>"
 ```
 {% endcode %}
@@ -111,7 +111,7 @@ smbclient -U 'user[%pass]' //<ip>/<share> -c "get <file> <output>"
 
 {% tab title="Windows" %}
 {% code overflow="wrap" %}
-```powershell
+```sh
 # mount smb Share to drive
 net use z: \\<ip>\<share> [/user:user pass]
 # copy from share
@@ -126,7 +126,7 @@ copy \\<ip>\<share>\<file> <output>
 {% tabs %}
 {% tab title="Send" %}
 {% code overflow="wrap" %}
-```bash
+```sh
 nc -nlvp <port> < <file>
 ```
 {% endcode %}
@@ -134,7 +134,7 @@ nc -nlvp <port> < <file>
 
 {% tab title="Recieve" %}
 {% code overflow="wrap" %}
-```bash
+```sh
 nc -nlvp <port> > <output>
 ```
 {% endcode %}
@@ -146,7 +146,7 @@ nc -nlvp <port> > <output>
 {% tabs %}
 {% tab title="Send" %}
 {% code overflow="wrap" %}
-```bash
+```sh
 cat <file> > /dev/tcp/<ip>/<port>
 ```
 {% endcode %}
@@ -154,7 +154,7 @@ cat <file> > /dev/tcp/<ip>/<port>
 
 {% tab title="Recieve" %}
 {% code overflow="wrap" %}
-```bash
+```sh
 cat < /dev/tcp/<target>/<port> > <output>
 ```
 {% endcode %}

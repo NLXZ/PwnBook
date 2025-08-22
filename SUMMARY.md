@@ -6,7 +6,7 @@
 
 * [Reconnaissance](enumeration-and-exploitation/reconnaissance.md)
 * [Network Services](enumeration-and-exploitation/network-services.md)
-* [Web Vulnerabilities](enumeration-and-exploitation/web-vulnerabilities/README.md)
+* [Web Security Testing](enumeration-and-exploitation/web-vulnerabilities/README.md)
   * [Command Injection](enumeration-and-exploitation/web-vulnerabilities/command-injection.md)
   * [Cross Site Request Forgery (CSRF)](enumeration-and-exploitation/web-vulnerabilities/csrf-cross-site-request-forgery.md)
   * [File Inclusion](enumeration-and-exploitation/web-vulnerabilities/file-inclusion.md)
