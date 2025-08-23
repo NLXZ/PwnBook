@@ -1,7 +1,6 @@
 ---
-icon: slash-forward
 layout:
-  width: default
+  width: wide
   title:
     visible: true
   description:

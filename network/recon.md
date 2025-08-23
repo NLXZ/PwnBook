@@ -1,7 +1,6 @@
 ---
-icon: radar
 layout:
-  width: default
+  width: wide
   title:
     visible: true
   description:
@@ -16,7 +15,7 @@ layout:
     visible: false
 ---
 
-# Reconnaissance
+# Network Reconnaissance
 
 ## Host discovery
 
@@ -58,27 +57,23 @@ nmap --top-ports 1000 -sU -n -Pn --min-rate 10000 <target>
 {% endtab %}
 {% endtabs %}
 
-### Nmap scripts
-
+{% tabs %}
+{% tab title="Nmap scripts" %}
 {% code overflow="wrap" %}
 ```bash
 nmap -p <ports> --script <script> <target>
 ```
 {% endcode %}
 
-<details>
-
-<summary>Scripts usage</summary>
-
-You can list all available Nmap scripts using the following commands:
-
-{% code overflow="wrap" %}
-```bash
- # List nmap nse scripts
- ls /usr/share/nmap/scripts | grep <service>
- # Get info about a script
- nmap --script-help <script>
-```
-{% endcode %}
-
-</details>
+> You can list all available Nmap scripts using the following commands:
+>
+> {% code overflow="wrap" %}
+> ```sh
+> # List nmap nse scripts
+> ls /usr/share/nmap/scripts | grep <service>
+> # Get info about a script
+> nmap --script-help <script>
+> ```
+> {% endcode %}
+{% endtab %}
+{% endtabs %}

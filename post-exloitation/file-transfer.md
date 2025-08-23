@@ -1,7 +1,6 @@
 ---
-icon: arrow-right-arrow-left
 layout:
-  width: default
+  width: wide
   title:
     visible: true
   description:

@@ -1,7 +1,6 @@
 ---
-icon: book-skull
 layout:
-  width: default
+  width: wide
   title:
     visible: true
   description:

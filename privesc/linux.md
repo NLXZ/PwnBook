@@ -1,7 +1,6 @@
 ---
-icon: linux
 layout:
-  width: default
+  width: wide
   title:
     visible: true
   description:
@@ -85,8 +84,9 @@ git clone https://github.com/saghul/lxd-alpine-builder && cd lxd-alpine-builder 
 ```
 {% endcode %}
 
-<pre class="language-bash"><code class="lang-bash"><strong># Import the image
-</strong>lxc image import ./alpine.tar.gz --alias privimg
+```bash
+# Import the image
+lxc image import ./alpine.tar.gz --alias privimg
 # Initialize
 lxd init
 # Create the containter
@@ -97,7 +97,7 @@ lxc config device add privcont privdev disk source=/ path=/mnt/root recursive=tr
 lxc start privcont
 # Interactive shell
 lxc exec privcont /bin/sh
-</code></pre>
+```
 
 ## Sudo
 

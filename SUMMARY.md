@@ -2,10 +2,10 @@
 
 * [Welcome](README.md)
 
-## NETWORK ENUMERATION <a href="#net-enum" id="net-enum"></a>
+## NETWORK
 
-* [Network Reconnaissance](net-enum/recon.md)
-* [Network Services](net-enum/services.md)
+* [Network Reconnaissance](network/recon.md)
+* [Network Services](network/services.md)
 
 ## ACTIVE DIRECTORY <a href="#ad" id="ad"></a>
 
@@ -14,7 +14,7 @@
 
 ## WEB APPLICATION SECURITY <a href="#web" id="web"></a>
 
-* [Web Reconnaissance](web/enum.md)
+* [Web Enumeration](web/enum.md)
 * [Web Application Vulnerabilities](web/vulnerabilites/README.md)
   * [Command Injection](web/vulnerabilites/command-injection.md)
   * [Cross Site Request Forgery (CSRF)](web/vulnerabilites/csrf-cross-site-request-forgery.md)
@@ -27,6 +27,7 @@
   * [Server Side Template Injection (SSTI)](web/vulnerabilites/ssti-server-side-template-injection.md)
   * [SQL Injection](web/vulnerabilites/sql-injection.md)
   * [XML External Entity (XXE)](web/vulnerabilites/xxe-xml-external-entity.md)
+* [Encoding Techniques](web/encoding.md)
 
 ## Post Exloitation
 

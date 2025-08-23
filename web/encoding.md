@@ -4,16 +4,16 @@ layout:
   title:
     visible: true
   description:
-    visible: false
+    visible: true
   tableOfContents:
     visible: true
   outline:
     visible: true
   pagination:
-    visible: false
+    visible: true
   metadata:
-    visible: false
+    visible: true
 ---
 
-# Web Application Vulnerabilities
+# Encoding Techniques
 

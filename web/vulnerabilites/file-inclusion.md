@@ -1,7 +1,6 @@
 ---
-icon: file-code
 layout:
-  width: default
+  width: wide
   title:
     visible: true
   description:

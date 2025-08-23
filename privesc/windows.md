@@ -1,7 +1,6 @@
 ---
-icon: windows
 layout:
-  width: default
+  width: wide
   title:
     visible: true
   description:

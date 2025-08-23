@@ -1,7 +1,6 @@
 ---
-icon: arrow-up-from-bracket
 layout:
-  width: default
+  width: wide
   title:
     visible: true
   description:
