@@ -1,19 +1,20 @@
 # Table of contents
 
-* [👾 Welcome](README.md)
+* [Welcome](README.md)
 
-## NETWORK ENUMERATION <a href="#enum" id="enum"></a>
+## NETWORK ENUMERATION <a href="#net-enum" id="net-enum"></a>
 
-* [Reconnaissance](enum/recon.md)
-* [Network Services](enum/services.md)
+* [Network Reconnaissance](net-enum/recon.md)
+* [Network Services](net-enum/services.md)
 
 ## ACTIVE DIRECTORY <a href="#ad" id="ad"></a>
 
 * [Active Directory Methodology](ad/methodology.md)
 * [Capturing NTLM](ad/ntlm.md)
 
-## WEB APPLICATION TESTING <a href="#web" id="web"></a>
+## WEB APPLICATION SECURITY <a href="#web" id="web"></a>
 
+* [Web Reconnaissance](web/enum.md)
 * [Web Application Vulnerabilities](web/vulnerabilites/README.md)
   * [Command Injection](web/vulnerabilites/command-injection.md)
   * [Cross Site Request Forgery (CSRF)](web/vulnerabilites/csrf-cross-site-request-forgery.md)
