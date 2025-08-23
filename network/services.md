@@ -23,7 +23,7 @@ layout:
 
 {% code overflow="wrap" %}
 ```bash
-ftp anonymous@<target>  # No password needed
+ftp anonymous@$TARGET  # No password needed
 ```
 {% endcode %}
 
@@ -31,7 +31,7 @@ ftp anonymous@<target>  # No password needed
 
 {% code overflow="wrap" %}
 ```bash
-sshpass -p '<password>' ftp <user>@<target>
+sshpass -p $PASSWORD ftp $USERNAME@$TARGET
 ```
 {% endcode %}
 
@@ -39,7 +39,7 @@ sshpass -p '<password>' ftp <user>@<target>
 
 {% code overflow="wrap" %}
 ```bash
-ftp://<user>:<password>@<target>
+ftp://$USERNAME:$PASSWORD@$TARGET
 ```
 {% endcode %}
 
@@ -47,7 +47,7 @@ ftp://<user>:<password>@<target>
 
 {% code overflow="wrap" %}
 ```bash
-lftp <target> -e "set ssl:verify-certificate no; set ftp:ssl-force true"
+lftp $TARGET -e "set ssl:verify-certificate no; set ftp:ssl-force true"
 ```
 {% endcode %}
 
@@ -55,7 +55,7 @@ lftp <target> -e "set ssl:verify-certificate no; set ftp:ssl-force true"
 
 {% code overflow="wrap" %}
 ```bash
-wget -r --user='<user>' --password='<password>' ftp://<target>
+wget -r --user=$USERNAME --password=$PASSWORD ftp://$TARGET
 ```
 {% endcode %}
 
@@ -69,15 +69,15 @@ Check for [default credentials](https://book.hacktricks.xyz/network-services-pen
 
 #### Auto login
 
-```
-sshpass -p '<password>' ssh <user>@<target>
+```sh
+sshpass -p $PASSWOR ssh $USERNAME@$TARGET
 ```
 
 #### Private key login
 
 {% code overflow="wrap" %}
 ```bash
-ssh -i id_rsa <user>@<target>
+ssh -i id_rsa $USERNAME@$TARGET
 ```
 {% endcode %}
 
@@ -95,7 +95,7 @@ ssh-keygen -t rsa -f id_rsa
 
 {% code overflow="wrap" %}
 ```bash
-whatweb http://<target>
+whatweb $URL
 ```
 {% endcode %}
 
@@ -107,26 +107,26 @@ I also recommend using this browser extension.
 
 {% code overflow="wrap" %}
 ```bash
-nmap -p80,443 --script http-enum <target>
+nmap -p80,443 --script http-enum $TARGET
 ```
 {% endcode %}
 
 {% code overflow="wrap" %}
 ```bash
-gobuster dir -u http://<target>/ -w wordlist.txt
+gobuster dir -u $URL -w $WORDLIST
 ```
 {% endcode %}
 
 {% code overflow="wrap" %}
 ```bash
-wfuzz -w wordlist.txt http://<target>/FUZZ
+wfuzz $URL/FUZZ -w $WORDLIST
 ```
 {% endcode %}
 
 {% code overflow="wrap" %}
 ```bash
 # Good option for BurpSuite requests
-ffuf -request request.txt -w wordlist.txt http://<target>/
+ffuf $URL -request request.txt -w $WORDLIST
 ```
 {% endcode %}
 
@@ -134,13 +134,13 @@ ffuf -request request.txt -w wordlist.txt http://<target>/
 
 {% code overflow="wrap" %}
 ```bash
-gobuster vhost -u http://<target>/ -w wordlist.txt
+gobuster vhost -u $URL -w $WORDLIST
 ```
 {% endcode %}
 
 {% code overflow="wrap" %}
 ```bash
-wfuzz -H 'Host: FUZZ.<target>' -w wordlist.txt http://<target>/
+wfuzz $URL -H 'Host: FUZZ.$TARGET' -w $WORDLIST
 ```
 {% endcode %}
 
@@ -155,7 +155,7 @@ wfuzz -H 'Host: FUZZ.<target>' -w wordlist.txt http://<target>/
 System enumeration with `enum4linux`
 
 ```bash
-enum4linux -a [-u '<user>' -p '<password>'] <target>
+enum4linux -a [-u $USERNAME -p $PASSWORD] $TARGET
 ```
 
 #### Shares Enumeration
@@ -165,11 +165,11 @@ enum4linux -a [-u '<user>' -p '<password>'] <target>
 {% code overflow="wrap" %}
 ```bash
 # null session
-smbclient -N -L //<target>
+smbclient -N -L //$TARGET
 # authenticated
-smbclient -U '<user>[%<password>]' -L //<target>
+smbclient -U $USERNAME[%$PASSWORD] -L //$TARGET
 # conect to a share
-smbclient [-U '<user>[%<password>]'] //<target>/share
+smbclient [-U $USERNAME[%$PASSWORD]] //$TARGET/$SHARE
 ```
 {% endcode %}
 {% endtab %}
@@ -178,11 +178,11 @@ smbclient [-U '<user>[%<password>]'] //<target>/share
 {% code overflow="wrap" %}
 ```bash
 # null session
-smbmap -H <target>
+smbmap -H $TARGET
 # authenticated
-smbmap -u '<user>' -p '<password>' -H <target>
+smbmap -u $USERNAME -p $PASSWORD -H <$TARGET
 # recursive/non-recursive listing
-smbmap [-u '<user>' -p '<password>'] -R/-r share -H <target>
+smbmap [-u $USERNAME -p $PASSWORD] -R/-r $SHARE -H $TARGET
 ```
 {% endcode %}
 {% endtab %}
@@ -191,11 +191,11 @@ smbmap [-u '<user>' -p '<password>'] -R/-r share -H <target>
 {% code overflow="wrap" %}
 ```bash
 # null session
-nxc smb <target> -u '' -p '' --shares
+nxc smb $TARGET -u '' -p '' --shares
 # authenticated
-nxc smb <target> -u '<user>' -p '<password>' --shares
+nxc smb $TARGET -u $USERNAME -p $PASSWORD --shares
 # List share
-nxc smb <target> [-u '<user>' -p '<password>'] --share share
+nxc smb $TARGET [-u $USERNAME -p $PASSWORD] --share $SHARE
 ```
 {% endcode %}
 {% endtab %}
@@ -203,7 +203,7 @@ nxc smb <target> [-u '<user>' -p '<password>'] --share share
 {% tab title="nmap" %}
 {% code overflow="wrap" %}
 ```bash
-nmap -p 139,445 --script "smb-enum-shares" <target>
+nmap -p 139,445 --script "smb-enum-shares" $TARGET
 ```
 {% endcode %}
 {% endtab %}
@@ -215,7 +215,7 @@ nmap -p 139,445 --script "smb-enum-shares" <target>
 
 {% code overflow="wrap" %}
 ```bash
-rpcdump.py <target>
+rpcdump.py $TARGET
 ```
 {% endcode %}
 
@@ -224,11 +224,11 @@ rpcdump.py <target>
 {% code overflow="wrap" %}
 ```bash
 # null session
-rpcclient -U '' -N <target>
+rpcclient -U "" -N $TARGET
 # authenticated
-rpcclient -U '<user>%<password>' -N <target>
+rpcclient -U $USERNAME%$PASSWORD -N $TARGET
 # commands
-rpcclient -U '[<user>%<password>]' -N <target> -c 'command'
+rpcclient -U "[$USERNAME%$PASSWORD]" -N $TARGET -c 'command'
 ```
 {% endcode %}
 

@@ -22,16 +22,16 @@ layout:
 {% tabs %}
 {% tab title="ICMP" %}
 {% code overflow="wrap" %}
-```bash
-nmap -sn 10.10.10.0/24
+```shell
+nmap -sn $NETWORK/24
 ```
 {% endcode %}
 {% endtab %}
 
 {% tab title="ARP" %}
 {% code overflow="wrap" %}
-```bash
-arp-scan -I <interface> --localnet --ignoredups
+```shell
+arp-scan -I $INTERFACE --localnet --ignoredups
 ```
 {% endcode %}
 {% endtab %}
@@ -42,16 +42,16 @@ arp-scan -I <interface> --localnet --ignoredups
 {% tabs %}
 {% tab title="TCP SYN" %}
 {% code overflow="wrap" fullWidth="false" %}
-```bash
-nmap -p- -sSCV -n -Pn --min-rate 10000 -T3 -v <target>
+```sh
+nmap -p- -sSCV -n -Pn --min-rate 10000 -T3 -v $TARGET
 ```
 {% endcode %}
 {% endtab %}
 
 {% tab title="UDP" %}
 {% code overflow="wrap" %}
-```bash
-nmap --top-ports 1000 -sU -n -Pn --min-rate 10000 <target>
+```sh
+nmap --top-ports 1000 -sU -n -Pn --min-rate 10000 $TARGET
 ```
 {% endcode %}
 {% endtab %}
@@ -60,8 +60,8 @@ nmap --top-ports 1000 -sU -n -Pn --min-rate 10000 <target>
 {% tabs %}
 {% tab title="Nmap scripts" %}
 {% code overflow="wrap" %}
-```bash
-nmap -p <ports> --script <script> <target>
+```sh
+nmap -p $PORTS --script $SCRIPT $TARGET
 ```
 {% endcode %}
 

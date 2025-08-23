@@ -147,5 +147,5 @@ ssh user@10.10.10.10 -D 1080
 ## Subnet forwarding
 
 ```sh
-sshuttle -r '<user>:<password>@<target>' <subnet>/<cidr>
+sshuttle -r <$USERNAME:$PASSWORD@$TARGET $SUBNET/$CIDR
 ```

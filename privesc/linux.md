@@ -61,8 +61,8 @@ set  # Shell variables
 List all the groups users belongs to.
 
 ```bash
-id [user]
-groups [user]
+id [$USERNAME]
+groups [$USERNAME]
 ```
 
 ### Docker
@@ -161,7 +161,7 @@ while true; do new=$(ps -eo user,cmd); diff <(echo "$old") <(echo "$new") | grep
 ## User Files
 
 ```bash
-find / -xdev -user <user> 2>/dev/null
+find / -xdev -user $USERNAME 2>/dev/null
 ```
 
 ## Passwords

