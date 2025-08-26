@@ -9,8 +9,9 @@
 
 ## ACTIVE DIRECTORY <a href="#ad" id="ad"></a>
 
-* [Active Directory Methodology](ad/methodology.md)
-* [Capturing NTLM](ad/ntlm.md)
+* [Active Directory Methodology](ad/methodology/README.md)
+  * [Capturing NTLM](ad/methodology/ntlm.md)
+  * [BloodHound](ad/methodology/bloodhound.md)
 
 ## WEB APPLICATION SECURITY <a href="#web" id="web"></a>
 
@@ -32,6 +33,7 @@
 ## Post Exloitation
 
 * [Reverse Shells](post-exloitation/reverse-shells.md)
+* [Sliver C2](post-exloitation/sliver.md)
 * [File Transfer](post-exloitation/file-transfer.md)
 * [Pivoting](post-exloitation/pivoting.md)
 

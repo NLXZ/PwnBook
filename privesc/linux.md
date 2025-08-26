@@ -158,7 +158,13 @@ find / -xdev -user $USERNAME 2>/dev/null
 
 {% code overflow="wrap" %}
 ```sh
-grep -P -a -i -R --exclude="*."{js,css,html} "(\b\w*(pass|pwd|auth|secret)\w*\b\s*[:=]\s*\S+)|['\"]\s*\w*(pass|pwd|auth|secret)\w*\s*['\"]\s*:\s*['\"]\S+['\"]|\(\s*['\"]\w*(pass|pwd|auth|secret)\w*['\"]\s*,\s*['\"]\S+['\"]\s*\)|(\w+://\S+:\S+@)|(\\$\w{1,4}[\\$./A-Za-z0-9]{8,50})"
+grep -r -E -n -i \
+  -e "(password|passwd|pass|pwd|secret|creds?|credentials?|auth|key|conn(ection)?|pdo|sql)[[:space:]]*[:=][[:space:]]*['\"]?[^[:space:]\'\"]+" \
+  -e "db[_-][^[:space:]]*[[:space:]]*[:=][[:space:]]*['\"]?[^[:space:]\'\"]+" \
+  -e "define[[:space:]]*\([[:space:]]*['\"]DB_[A-Z_]+['\"][[:space:]]*,[[:space:]]*['\"][^'\"]+" \
+  -e "<[^>]*(password|passwd|pass|pwd|secret|creds?|credentials?|auth|key|conn(ection)?|pdo|sql)[^>]*>[^<]+</[^>]*>" \
+  -e "['\"](password|passwd|pass|pwd|secret|creds?|credentials?|auth|key|conn(ection)?|pdo|sql)['\"][[:space:]]*:[[:space:]]*['\"][^'\"]+['\"]" \
+  -e "[a-zA-Z]+://[^:]+:[^@]+@"
 ```
 {% endcode %}
 
