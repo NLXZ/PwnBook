@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Welcome](README.md)
+* [PwnBook](README.md)
 
 ## NETWORK
 
@@ -17,16 +17,16 @@
 * [Web Enumeration](web/enum.md)
 * [Web Application Vulnerabilities](web/vulnerabilites/README.md)
   * [Command Injection](web/vulnerabilites/command-injection.md)
-  * [Cross Site Request Forgery (CSRF)](web/vulnerabilites/csrf-cross-site-request-forgery.md)
-  * [Cross Site Scripting (XSS)](web/vulnerabilites/xss-cross-site-scripting.md)
+  * [Cross Site Request Forgery (CSRF)](web/vulnerabilites/csrf.md)
+  * [Cross Site Scripting (XSS)](web/vulnerabilites/xss.md)
   * [File Inclusion](web/vulnerabilites/file-inclusion.md)
   * [File Upload](web/vulnerabilites/file-upload.md)
-  * [NoSQL Injection](web/vulnerabilites/nosql-injection.md)
+  * [NoSQL Injection](web/vulnerabilites/nosqli.md)
   * [Path Traversal](web/vulnerabilites/path-traversal.md)
-  * [Server Side Request Forgery (SSRF)](web/vulnerabilites/ssrf-server-side-request-forgery.md)
-  * [Server Side Template Injection (SSTI)](web/vulnerabilites/ssti-server-side-template-injection.md)
-  * [SQL Injection](web/vulnerabilites/sql-injection.md)
-  * [XML External Entity (XXE)](web/vulnerabilites/xxe-xml-external-entity.md)
+  * [Server Side Request Forgery (SSRF)](web/vulnerabilites/ssrf.md)
+  * [Server Side Template Injection (SSTI)](web/vulnerabilites/ssti.md)
+  * [SQL Injection](web/vulnerabilites/sqli.md)
+  * [XML External Entity (XXE)](web/vulnerabilites/xxe.md)
 * [Encoding Techniques](web/encoding.md)
 
 ## Post Exloitation

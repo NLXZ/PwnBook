@@ -2,6 +2,7 @@
 description: >-
   Welcome to PwnBook, a personal pentesting cheatsheet with tricks and scripts
   for reconnaissance, enumeration, privesc, and more...
+hidden: true
 layout:
   width: wide
   title:
@@ -18,7 +19,7 @@ layout:
     visible: false
 ---
 
-# Welcome
+# PwnBook
 
-{% embed url="https://nlxz.gitbook.io/pwnbook" %}
+{% embed url="https://nlxz.gitbook.io/pwnbook/" %}
 

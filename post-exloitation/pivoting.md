@@ -30,7 +30,7 @@ You can download some useful binaries such as chisel, socat, nmap, etc:\
 {% tab title="Bash" %}
 {% code overflow="wrap" %}
 ```sh
-for ip in 10.10.10.{1..254}; do ((ping -c1 -W1 $ip &>/dev/null && echo $ip)&) done; wait
+for ip in <network_prefix>.{1..254}; do ((ping -c1 -W1 $ip &>/dev/null && echo $ip)&) done; wait
 ```
 {% endcode %}
 {% endtab %}
@@ -38,13 +38,13 @@ for ip in 10.10.10.{1..254}; do ((ping -c1 -W1 $ip &>/dev/null && echo $ip)&) do
 {% tab title="PowerShell" %}
 {% code overflow="wrap" %}
 ```powershell
-$t = 1..254 | % { [Net.NetworkInformation.Ping]::new().SendPingAsync("10.10.10.$_", 100) }; [Threading.Tasks.Task]::WaitAll($t); $t.Result.Where{$_.Status -eq "Success"}.Address.IPAddressToString
+$t = 1..254 | % { [Net.NetworkInformation.Ping]::new().SendPingAsync("<network_prefix>.$_", 100) }; [Threading.Tasks.Task]::WaitAll($t); $t.Result.Where{$_.Status -eq "Success"}.Address.IPAddressToString
 ```
 {% endcode %}
 {% endtab %}
 
 {% tab title="Nmap" %}
-<pre class="language-sh" data-overflow="wrap"><code class="lang-sh"><strong>./nmap -sn 10.10.10.0/24
+<pre class="language-sh" data-overflow="wrap"><code class="lang-sh"><strong>./nmap -sn &#x3C;subnet>
 </strong></code></pre>
 {% endtab %}
 
@@ -61,15 +61,23 @@ arp -a
 {% tab title="Bash" %}
 {% code overflow="wrap" %}
 ```sh
-for port in {1..65535}; do ((timeout 0.01 bash -c "echo > /dev/tcp/10.10.10.10/$port" 2>/dev/null && echo -e "$port\033[K")&); (( port % 500 == 0 )) && wait && echo -ne "$port/65535\r"; done; wait
+for port in {1..65535}; do ((bash -c "echo > /dev/tcp/<target_ip>/$port" 2>/dev/null && echo $port)&); (( port % 200 == 0 )) && wait; done; wait
 ```
 {% endcode %}
+
+> With progress:
+>
+> {% code overflow="wrap" %}
+> ```sh
+> for port in {1..65535}; do ((bash -c "echo > /dev/tcp/<target_ip>/$port" 2>/dev/null && echo -e "$port\033[K")&); (( port % 200 == 0 )) && wait && echo -ne "$port/65535\r"; done; wait
+> ```
+> {% endcode %}
 {% endtab %}
 
 {% tab title="PowerShell" %}
 {% code overflow="wrap" %}
 ```powershell
-$t = 1..10000 | % { $c = [System.Net.Sockets.TcpClient]::new(); [PSCustomObject]@{Port=$_; Task=$c.ConnectAsync($ip, $_); Client=$c }}; $null = [Threading.Tasks.Task]::WaitAll($t.Task, 100); $t | ? {$_.Task.IsCompleted -and $_.Client.Connected} | % {$_.Port; $_.Client.Dispose()}
+$ip = "<target_ip>"; $pool = [RunspaceFactory]::CreateRunspacePool(1, 100); $pool.Open(); $rs = for ($p = 1; $p -le 1024; $p++) { $ps = [PowerShell]::Create(); $ps.RunspacePool = $pool; [void]$ps.AddScript({ param($ip, $p)try { $tcp = New-Object Net.Sockets.TcpClient; $r = $tcp.BeginConnect($ip, $p, $null, $null); if ($r.AsyncWaitHandle.WaitOne(300, $false) -and $tcp.Connected) { $tcp.EndConnect($r); $p } }finally { $tcp.Close() } }).AddArgument($ip).AddArgument($p); [PSCustomObject]@{P = $ps; S = $ps.BeginInvoke() } }; $rs | % { $r = $_.P.EndInvoke($_.S); if ($r) { $r }; $_.P.Dispose() }; $pool.Dispose()
 ```
 {% endcode %}
 {% endtab %}
@@ -77,7 +85,7 @@ $t = 1..10000 | % { $c = [System.Net.Sockets.TcpClient]::new(); [PSCustomObject]
 {% tab title="Nmap" %}
 {% code overflow="wrap" %}
 ```sh
-.\nmap -p- -sT -n -Pn -v --min-rate 10000 <target>
+./nmap -p- -sS -n -Pn --min-rate 10000 -v <target_ip>
 ```
 {% endcode %}
 {% endtab %}
@@ -87,7 +95,7 @@ $t = 1..10000 | % { $c = [System.Net.Sockets.TcpClient]::new(); [PSCustomObject]
 
 {% code overflow="wrap" %}
 ```sh
-seq 1 65535 | xargs -P 500 -I {} proxychains -q nmap -sT -Pn -p{} -open --min-rate 5000 -n -vvv <target> 2>&1 | grep -Po '\d+(?=/tcp open)'
+for port in {1..65535}; do ((proxychains -q nmap -p$port -sT -n -Pn --open -v <target_ip> |& grep -Po '\d+(?=/tcp open)')&); (( port % 200 == 0 )) && wait; done; wait
 ```
 {% endcode %}
 
@@ -95,7 +103,7 @@ seq 1 65535 | xargs -P 500 -I {} proxychains -q nmap -sT -Pn -p{} -open --min-ra
 
 {% code overflow="wrap" %}
 ```sh
-bash -c 'ip=<target>; for port in $(seq 1 65535); do proxychains -q bash -c "echo > /dev/tcp/$ip/$port" > /dev/null 2>&1 && echo -e "$port\033[K" & if [ $((port % 200)) -eq 0 ]; then wait; fi; echo -ne "$port/65535\r"; done; wait'
+for port in {1..65535}; do ((proxychains -q bash -c "echo > /dev/tcp/<target_ip>/$port" 2>/dev/null && echo $port)&); (( port % 100 == 0 )) && wait; done; wait
 ```
 {% endcode %}
 {% endtab %}
@@ -105,28 +113,33 @@ bash -c 'ip=<target>; for port in $(seq 1 65535); do proxychains -q bash -c "ech
 
 {% tabs %}
 {% tab title="Chisel" %}
-First, run the chisel server in reverse mode on your host:
+First, run the chisel server in reverse mode in your host:
 
+{% code overflow="wrap" %}
 ```sh
-chisel server -p 8081 --reverse
+chisel server -p <listener_port> --reverse
 ```
+{% endcode %}
 
 Then, connect to the server:
 
+{% code overflow="wrap" %}
 ```sh
-# Forward port 8080 to 10.10.10.20:80
-chisel client 10.10.10.10:8081 R:3306:127.0.0.1:3306
-
-# Create proxy SOCKS5 on 127.0.0.1:1080
-chisel client 10.10.10.10:8081 R:socks
+chisel client <listener_ip>:<listener_port> R:<local_port>:<remote_host>:<remote_port>
 ```
+{% endcode %}
+
+{% code overflow="wrap" %}
+```sh
+chisel client <listener_ip>:<listener_port> R:socks
+```
+{% endcode %}
 {% endtab %}
 
 {% tab title="Socat" %}
 {% code overflow="wrap" %}
 ```sh
-# Forward port 8080 to 10.10.10.20:80
-socat tcp-l:8080,fork,reuseaddr tcp:10.10.10.20:80
+socat tcp-l:<local_port>,fork,reuseaddr tcp:<remote_host>:<remote_port>
 ```
 {% endcode %}
 {% endtab %}
@@ -134,11 +147,13 @@ socat tcp-l:8080,fork,reuseaddr tcp:10.10.10.20:80
 {% tab title="SSH" %}
 {% code overflow="wrap" %}
 ```sh
-# Forward port 8080 to 127.0.0.1:80
-ssh user@10.10.10.10 -L 8080:127.0.0.1:80
+ssh <user>@<target_ip> -L <local_port>:<remote_host>:<remote_port>
+```
+{% endcode %}
 
-# Create proxy SOCKS5 on 127.0.0.1:1080
-ssh user@10.10.10.10 -D 1080
+{% code overflow="wrap" %}
+```sh
+ssh <user>@<target_ip> -D <socks_port>
 ```
 {% endcode %}
 {% endtab %}
@@ -147,5 +162,5 @@ ssh user@10.10.10.10 -D 1080
 ## Subnet forwarding
 
 ```sh
-sshuttle -r <$USERNAME:$PASSWORD@$TARGET $SUBNET/$CIDR
+sshuttle -r <user>:<password>@<target_ip> <subnet>
 ```

