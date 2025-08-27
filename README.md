@@ -21,5 +21,6 @@ layout:
 
 # PwnBook
 
-{% embed url="https://nlxz.gitbook.io/pwnbook/" %}
 
+
+{% embed url="https://nlxz.gitbook.io" %}
