@@ -41,10 +41,10 @@ If you dont know the full path of the file or even the extension, you can use: `
 cmd /s <FILE>
 ```
 
-### List Recursive Directories (PowerShell)
+### List Recursive Directories
 
-```powershell
-ls . -Recurse -Force -Name -Filter "<filter>" | foreach { ls -for $_ }
+```batch
+tree /F
 ```
 
 ### Add SMB share to network drives
